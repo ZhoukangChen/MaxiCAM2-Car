@@ -1,0 +1,7 @@
+# 中文注释：忽略系统元数据、构建中间件、本机固件备份和相机诊断帧。
+.DS_Store
+**/*.o
+**/*.elf
+**/*.map
+/firmware/**/backups/
+/figure/vision-debug/
