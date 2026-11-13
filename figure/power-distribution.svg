@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 780" role="img" aria-labelledby="title desc">
+  <title id="title">3S 6000mAh 电池与 MP2491C 三路稳压分配图</title>
+  <desc id="desc">一块 3S 6000mAh 电池经主保险丝和总开关后分为电机驱动和 MP2491C 输入。AT8236 的 VM 由电池供电；MP2491C 的 VADJ 7.5V、固定 5V、固定 3.3V 分别给 NUCLEO、相机和循线模块、ToF 供电；所有地线共地。</desc>
+  <defs>
+    <linearGradient id="pbg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#101a29"/><stop offset="1" stop-color="#1a2b40"/></linearGradient>
+    <filter id="pshadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#030812" flood-opacity=".34"/></filter>
+    <style>
+      text{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
+      .white{fill:#f1f6ff}.muted{fill:#9eafc5}.small{font-size:12px}.label{font-size:14px;font-weight:750}
+      .tiny{font-size:10px}.wire{fill:none;stroke:#f06f68;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+      .gnd{fill:none;stroke:#9db0c5;stroke-width:2.5;stroke-dasharray:8 7}
+      .box{fill:#17283b;stroke:#405671;stroke-width:1.5}
+    </style>
+  </defs>
+  <rect width="1320" height="780" rx="24" fill="url(#pbg)"/>
+  <rect x="1" y="1" width="1318" height="778" rx="23" fill="none" stroke="#5c7593" stroke-opacity=".34"/>
+  <text x="36" y="44" class="white" font-size="22" font-weight="850">单电池 · 电机直供驱动 · MP2491C 三路稳压</text>
+  <text x="36" y="70" class="muted small">红线为电池正极分路；虚线为公共地。USB-C 只传输 MP2491C 固定 5V。</text>
+
+  <!-- 电池与主保护 -->
+  <g filter="url(#pshadow)">
+    <rect x="38" y="265" width="220" height="190" rx="18" fill="#2d2632" stroke="#ff8585" stroke-width="2.5"/>
+    <rect x="66" y="292" width="164" height="95" rx="12" fill="#17202d" stroke="#704b58"/>
+    <text x="148" y="321" text-anchor="middle" fill="#ffdada" font-size="16" font-weight="850">3S2P 锂电池</text>
+    <text x="148" y="348" text-anchor="middle" class="white small">6000mAh · 约 300g</text>
+    <text x="148" y="372" text-anchor="middle" fill="#ffb9b9" class="small">11.1V 标称 / 12.6V 满电</text>
+    <text x="148" y="422" text-anchor="middle" class="muted tiny">T 插输出 · 6A 额定 / 10A 最大</text>
+
+    <rect x="302" y="316" width="116" height="62" rx="11" fill="#302a20" stroke="#ffc857" stroke-width="2"/>
+    <text x="360" y="342" text-anchor="middle" fill="#ffe5a8" class="label">主保险丝</text>
+    <text x="360" y="362" text-anchor="middle" class="muted tiny">按峰值核定</text>
+    <rect x="450" y="316" width="116" height="62" rx="11" fill="#183041" stroke="#66d9ef" stroke-width="2"/>
+    <text x="508" y="353" text-anchor="middle" fill="#d8f8ff" class="label">总开关</text>
+  </g>
+  <path d="M258 347H302M418 347H450M566 347H600" class="wire"/>
+  <circle cx="600" cy="347" r="7" fill="#ffaaa4"/>
+  <path d="M600 347V166H630M600 347V448H630" class="wire"/>
+
+  <!-- 电机动力支路 -->
+  <g filter="url(#pshadow)">
+    <rect x="630" y="95" width="290" height="150" rx="15" class="box" stroke="#ffc857"/>
+    <text x="654" y="127" fill="#ffe2a0" class="label">电机驱动 · 电池直供 VM</text>
+    <text x="654" y="154" class="white small">AT8236 带稳压版 · VM 5–17V</text>
+    <text x="654" y="179" class="muted small">每路 3A 连续 / 6A 峰值</text>
+    <text x="654" y="210" fill="#ffe2a0" class="tiny">电池 + → VM+；电池 − → GND</text>
+
+    <rect x="950" y="95" width="330" height="150" rx="15" class="box" stroke="#ffc857"/>
+    <text x="975" y="127" fill="#ffe2a0" class="label">两路电机输出</text>
+    <text x="975" y="154" class="white small">Motor-A → 左侧 MD520Z56_12V</text>
+    <text x="975" y="179" class="white small">Motor-B → 右侧 MD520Z56_12V</text>
+    <text x="975" y="210" class="muted tiny">1:56 · 65mm 轮胎 · 编码器闭环</text>
+  </g>
+  <path d="M920 166H950" fill="none" stroke="#ffc857" stroke-width="3.5"/>
+
+  <!-- 稳压器输入与三路输出 -->
+  <g filter="url(#pshadow)">
+    <rect x="630" y="373" width="290" height="182" rx="15" class="box" stroke="#66d9ef"/>
+    <text x="654" y="408" fill="#b8f4ff" class="label">MP2491C 三路稳压板</text>
+    <text x="654" y="435" class="white small">输入 6–24V · 电池总线输入</text>
+    <text x="654" y="462" class="muted small">VADJ 1.2–24V · 固定 5V · 固定 3.3V</text>
+    <text x="654" y="491" class="white small">T 插线版本接电池分线</text>
+    <text x="654" y="523" fill="#b8f4ff" class="tiny">先空载测量三路输出，再接设备</text>
+
+    <rect x="950" y="285" width="330" height="106" rx="14" class="box" stroke="#63e6be"/>
+    <rect x="950" y="414" width="330" height="128" rx="14" class="box" stroke="#66d9ef"/>
+    <rect x="950" y="565" width="330" height="92" rx="14" class="box" stroke="#a4a7ff"/>
+  </g>
+  <path d="M920 430H935V338H950" fill="none" stroke="#63e6be" stroke-width="3.5"/>
+  <path d="M920 450H935V478H950" fill="none" stroke="#66d9ef" stroke-width="3.5"/>
+  <path d="M920 475H935V611H950" fill="none" stroke="#a4a7ff" stroke-width="3.5"/>
+
+  <text x="974" y="317" fill="#a9f4dd" class="label">VADJ · 设 7.5V → NUCLEO VIN</text>
+  <text x="974" y="344" class="white small">NUCLEO-F446RE · CN7-24</text>
+  <text x="974" y="368" class="muted tiny">VIN 输入范围 7–12V</text>
+
+  <text x="974" y="445" fill="#b8f4ff" class="label">固定 5V → MaixCAM2 与循线模块</text>
+  <text x="974" y="472" class="white small">MaixCAM2：5V / 1A，经 USB-C 供电引线</text>
+  <text x="974" y="498" class="white small">YB-MUX04-2.0：5V / 约 85mA</text>
+  <text x="974" y="522" class="muted tiny">USB-C 引线需支持 5V 电源识别；不用 9V PD 触发</text>
+
+  <text x="974" y="599" fill="#d3d4ff" class="label">固定 3.3V → SEN0628 ToF</text>
+  <text x="974" y="627" class="muted tiny">ToF 为后续待购；I²C 信号与主控共地</text>
+
+  <!-- 共地总线 -->
+  <path d="M80 711H1300" class="gnd"/>
+  <path d="M148 455V711M630 230H585V711M775 555V711M1115 657V711M1280 374H1295V711" class="gnd"/>
+  <circle cx="148" cy="711" r="5" fill="#e4edf8"/><circle cx="585" cy="711" r="5" fill="#e4edf8"/><circle cx="775" cy="711" r="5" fill="#e4edf8"/><circle cx="1115" cy="711" r="5" fill="#e4edf8"/><circle cx="1295" cy="711" r="5" fill="#e4edf8"/>
+  <text x="80" y="744" class="white small" font-weight="750">公共地线：电池、AT8236、MP2491C、NUCLEO 和传感器 GND 共地；电机回流线独立布置。</text>
+  <text x="80" y="766" fill="#ffcf87" class="tiny">注意：AT8236 的板载 5V 输出不与 MP2491C 固定 5V 输出并联；电池低压报警和保险丝值待实测确定。</text>
+</svg>
