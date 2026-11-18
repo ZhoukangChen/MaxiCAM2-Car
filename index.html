@@ -178,9 +178,18 @@
     .mounting-check .diagram-frame a { display: block; }
     .mounting-check .diagram-frame img { display: block; width: 100%; height: auto; }
     .assembly-key { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
-    .assembly-key-item { display: flex; align-items: flex-start; gap: 8px; min-width: 0; padding: 9px; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,.025); color: #dce8f8; font-size: 10px; line-height: 1.45; }
-    .assembly-key-item b { color: #f0f5ff; font-size: 10px; }
-    .assembly-key-number { display: inline-flex; flex: 0 0 22px; width: 22px; height: 22px; align-items: center; justify-content: center; border: 1px solid rgba(102,217,239,.42); border-radius: 50%; color: #b8f4ff; font-size: 11px; font-weight: 850; }
+    .assembly-key-item { display: flex; align-items: flex-start; gap: 8px; min-width: 0; padding: 9px; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,.025); color: #dce8f8; font-size: 11px; line-height: 1.5; }
+    .assembly-key-item b { color: #f0f5ff; font-size: 11px; }
+    .assembly-deck-label { display: inline-flex; flex: 0 0 40px; min-height: 24px; align-items: center; justify-content: center; padding: 3px 5px; border: 1px solid rgba(102,217,239,.36); border-radius: 7px; color: #aeeeff; background: rgba(102,217,239,.08); font-size: 9px; font-weight: 850; }
+    .assembly-deck-label.middle { border-color: rgba(255,200,87,.34); color: #ffd16d; background: rgba(255,200,87,.08); }
+    .assembly-deck-label.bottom { border-color: rgba(99,230,190,.32); color: #8ce3c5; background: rgba(99,230,190,.08); }
+    .assembly-views-section { margin: 24px 20px 0; padding-top: 18px; border-top: 1px solid var(--line); }
+    .assembly-views-section h3 { margin: 5px 0 7px; font-size: 16px; }
+    .assembly-views-section > p { margin: 0; color: #9fb0c6; font-size: 12px; line-height: 1.65; }
+    .assembly-views-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 10px; margin-top: 12px; }
+    .assembly-view-card { min-width: 0; margin: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: #f5f4f0; }
+    .assembly-view-card img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: contain; }
+    .assembly-view-card figcaption { padding: 8px 10px; color: #dce8f8; background: rgba(255,255,255,.035); font-size: 11px; line-height: 1.45; }
     .wiring-visual-grid { display: grid; grid-template-columns: minmax(0,1.15fr) minmax(280px,.85fr); gap: 12px; margin: 0 20px; align-items: start; }
     .wiring-visual-card { min-width: 0; padding: 13px; border: 1px solid var(--line); border-radius: 13px; background: rgba(255,255,255,.025); }
     .wiring-visual-card h3 { margin: 0 0 9px; color: #eaf2fc; font-size: 13px; }
@@ -315,6 +324,7 @@
 
     @media (max-width: 1040px) {
       .panel-grid, .power-page-grid, .overview-layout, .vision-layout, .wiring-grid, .assembly-layout-grid { grid-template-columns: minmax(0,1fr); }
+      .assembly-views-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
       .arrival-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
     }
     @media (max-width: 640px) {
@@ -342,6 +352,8 @@
       .assembly-layout-grid .diagram-frame img { max-height: 560px; }
       .mounting-check { margin: 20px 10px 0; }
       .assembly-key { grid-template-columns: 1fr; }
+      .assembly-views-section { margin: 20px 10px 0; }
+      .assembly-views-grid { grid-template-columns: 1fr; }
       .wiring-note-grid { grid-template-columns: 1fr; margin-left: 10px; margin-right: 10px; }
       .power-page-grid { padding-left: 10px; padding-right: 10px; }
       .diagram-caption { margin-left: 12px; margin-right: 12px; }
@@ -411,12 +423,12 @@
                 <li><b>主控分工：</b>视觉板识别路线和障碍物，F446RE 负责实时转向、速度和停车。</li>
                 <li><b>驱动结构：</b>两轮差速，包装标注 2 个 1:56、带码盘的 520 减速电机，配 65 mm 轮胎；电机额定电压和编码器计数待核。</li>
                 <li><b>供电原则：</b>已到货的 3S 6000mAh 电池计划直供 AT8236；稳压模块输出布局仍需核对实物并用万用表测量。</li>
-                <li><b>车架目标：</b>约 220 × 160 mm 的自制车架，最终外形需留足比赛尺寸余量。</li>
+                <li><b>底盘结构：</b>采用双层铝合金底盘，商品图标注上层板约 228 × 148 mm；组装后仍需按比赛限尺寸复核外廓。</li>
               </ul>
             </div>
-            <figure class="vehicle-stage" aria-label="循迹避障小车整车概念图与模块编号">
-              <img src="figure/assembly-layout-3d-v5.png" alt="image-gen 生成的两轮差速车装配图：左右两只驱动轮位于同一根横轴，车尾中心一个小万向轮；相机朝前、车底八路线阵朝下。">
-              <figcaption class="stage-label">3D 装配图 · 编号说明见组装布局分页</figcaption>
+            <figure class="vehicle-stage" aria-label="循迹避障小车双层底盘 3D 装配图">
+              <img src="figure/assembly-layout-3d-v6.png" alt="双层循迹避障车 3D 装配图：上层放 NUCLEO-F446RE 和 MaixCAM2 前视相机，中层放电池、AT8236 双路电机驱动板和 MP2491C 稳压模块；八路循线阵列居中安装在车底、感应面朝下。">
+              <figcaption class="stage-label">双层底盘 3D 装配图</figcaption>
             </figure>
           </div>
           <p class="concept-note">概念图用于展示模块位置，不是最终 CAD。传感器、驱动和电机的图片外观为示意；采购前核对具体规格，组装后复核车宽、视野和走线。</p>
@@ -448,23 +460,29 @@
 
       <section class="page-panel" id="panel-assembly" data-page-panel="assembly" role="tabpanel" tabindex="0" aria-labelledby="tab-assembly" hidden>
         <div class="card">
-          <div class="card-head"><div><div class="section-kicker">ASSEMBLY LAYOUT</div><h2>两轮差速车 · 3D 装配示意</h2></div><div class="small-note">目标车架约 220 × 160 mm</div></div>
-          <p class="panel-lead">下图按计划部件外形重做。主视图车头朝上：两只驱动轮左右对称、位于同一根横轴，车尾中心一个小万向轮。相机镜头箭头指向车前；右侧下视小图显示八路光电头朝下并位于车体中心线。到货模块的型号和尺寸需开箱核对后再加工支架。</p>
+          <div class="card-head"><div><div class="section-kicker">ASSEMBLY LAYOUT</div><h2>双层底盘 · 3D 装配示意</h2></div><div class="small-note">底盘上层板约 228 × 148 mm</div></div>
+          <p class="panel-lead">装配图按你给的双层底盘实物结构更新：上层板放 NUCLEO-F446RE 和前视 MaixCAM2；中层放 3S 电池、AT8236 双路电机驱动板和 MP2491C 稳压模块；八路循线阵列位于底盘中心下方、感应面朝地。底盘外形和安装孔仍需按实物复核。</p>
           <div class="assembly-layout-grid">
-            <figure class="diagram-frame"><img src="figure/assembly-layout-3d-v5.png" alt="两轮差速小车装配 3D 图及俯视、底视细节图，包含同轴左右驱动轮、车尾中心万向轮、前视相机和朝下的八路循线模块。"></figure>
-            <div class="assembly-key" aria-label="3D 装配图编号说明">
-              <div class="assembly-key-item"><span class="assembly-key-number">1</span><span><b>MaixCAM2</b><br>4GB + 2K OS04D10，已购</span></div>
-              <div class="assembly-key-item"><span class="assembly-key-number">2</span><span><b>SEN0628 ToF</b><br>8×8 测距，后续待采购</span></div>
-              <div class="assembly-key-item"><span class="assembly-key-number">3</span><span><b>八路下视循线模块</b><br>已到货；包装未标具体型号，尺寸待实物测量</span></div>
-              <div class="assembly-key-item"><span class="assembly-key-number">4</span><span><b>NUCLEO-F446RE</b><br>实时控制主控，已有</span></div>
-              <div class="assembly-key-item"><span class="assembly-key-number">5</span><span><b>AT8236</b><br>包装标注带稳压版，已到货；开箱核板</span></div>
-              <div class="assembly-key-item"><span class="assembly-key-number">6</span><span><b>可调稳压模块</b><br>已到货；芯片型号与各路输出待核</span></div>
-              <div class="assembly-key-item"><span class="assembly-key-number">7</span><span><b>3S 6000mAh 电池</b><br>标签：11.1V 标称、12.6V 最高，已到货</span></div>
-              <div class="assembly-key-item"><span class="assembly-key-number">8</span><span><b>1:56 520 编码电机 ×2</b><br>已到货；额定电压和编码器计数待核</span></div>
-              <div class="assembly-key-item"><span class="assembly-key-number">9</span><span><b>后万向轮 ×1</b><br>支撑件待选，车架自制</span></div>
+            <figure class="diagram-frame"><img src="figure/assembly-layout-3d-v6.png" alt="双层循迹避障车 3D 装配图：顶层为 NUCLEO-F446RE 和车头 MaixCAM2，中层为电池、AT8236 和 MP2491C，八路循线阵列居中安装在车底朝下。"></figure>
+            <div class="assembly-key" aria-label="双层小车各层部件位置">
+              <div class="assembly-key-item"><span class="assembly-deck-label">顶层</span><span><b>NUCLEO-F446RE + MaixCAM2</b><br>主控板平放在上层；相机安装在车头，镜头向前。</span></div>
+              <div class="assembly-key-item"><span class="assembly-deck-label middle">中层</span><span><b>3S 电池 + AT8236 + MP2491C</b><br>电池固定在中层，驱动板和稳压模块并排安装。</span></div>
+              <div class="assembly-key-item"><span class="assembly-deck-label bottom">车底</span><span><b>八路循线阵列</b><br>位于车体中心线下方，感应面朝向地面。</span></div>
+              <div class="assembly-key-item"><span class="assembly-deck-label">动力</span><span><b>520 编码电机 ×2</b><br>1:56 减速比，配 65 mm 驱动轮；万向轮按底盘套件安装。</span></div>
+              <div class="assembly-key-item"><span class="assembly-deck-label middle">待装</span><span><b>SEN0628 ToF</b><br>后续采购；本次装配渲染不把未到货 ToF 画成实物。</span></div>
             </div>
           </div>
-          <p class="diagram-caption">主图显示两只 65 mm 驱动轮共轴、左右对称，另有一只位于车尾中心线上的万向轮；底视小图表示八个光电头朝地面、阵列中心与车体中心线对齐。Gravity IO 保留在清单中但未画入车体图。此图是 image-gen 装配示意，不是 CAD 加工图；加工前按到货实物孔位和比赛外廓复核。</p>
+          <p class="diagram-caption">主图和三视图按实际双层结构生成，用于核对部件上下层关系，不是 CAD 加工图。实物孔位、支架高度、线束固定和比赛外廓，仍需按到货底盘复核。</p>
+          <section class="assembly-views-section" aria-labelledby="assembly-views-title">
+            <div class="section-kicker">ORTHOGRAPHIC VIEWS</div>
+            <h3 id="assembly-views-title">双层小车三视图</h3>
+            <p>正视、俯视和侧视共用同一双层布局：主控与相机在上层，电池和驱动稳压模块在中层，循线阵列在车底中央。</p>
+            <div class="assembly-views-grid">
+              <figure class="assembly-view-card"><img src="figure/car-three-view-front.png" alt="双层小车正视图：顶层 MaixCAM2 和 NUCLEO，中层电池、AT8236 和 MP2491C，车底中央是八路循线阵列。" loading="lazy"><figcaption>正视图 · 摄像头朝前，双层结构清楚可见</figcaption></figure>
+              <figure class="assembly-view-card"><img src="figure/car-three-view-top.png" alt="双层小车俯视图：NUCLEO-F446RE 和 MaixCAM2 位于顶层，电池、AT8236 和 MP2491C 位于其下方中层。" loading="lazy"><figcaption>俯视图 · 顶层板与中层部件位置</figcaption></figure>
+              <figure class="assembly-view-card"><img src="figure/car-three-view-side.png" alt="双层小车侧视图：上层 NUCLEO 和 MaixCAM2，中层电池及驱动稳压模块，底部八路循线阵列朝下。" loading="lazy"><figcaption>侧视图 · 上下层板由铜柱支撑</figcaption></figure>
+            </div>
+          </section>
           <section class="mounting-check" aria-labelledby="mounting-check-title">
             <div class="section-kicker">MOUNTING HOLE CHECK</div>
             <h3 id="mounting-check-title">NUCLEO-F446RE 与底盘孔位对照</h3>
