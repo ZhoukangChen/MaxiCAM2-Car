@@ -427,7 +427,7 @@
               </ul>
             </div>
             <figure class="vehicle-stage" aria-label="循迹避障小车双层底盘 3D 装配图">
-              <img src="figure/assembly-layout-3d-v6.png" alt="双层循迹避障车 3D 装配图：上层放 NUCLEO-F446RE 和 MaixCAM2 前视相机，中层放电池、AT8236 双路电机驱动板和 MP2491C 稳压模块；八路循线阵列居中安装在车底、感应面朝下。">
+              <img src="figure/assembly-layout-3d-v7.png" alt="双层循迹避障车平行投影 3D 装配图：前端中心的 MaixCAM2 与一对小万向轮、上层 NUCLEO-F446RE、中层电池与驱动稳压板、后端同轴两只大驱动轮，以及车底中央朝下的八路循线阵列。">
               <figcaption class="stage-label">双层底盘 3D 装配图</figcaption>
             </figure>
           </div>
@@ -463,7 +463,7 @@
           <div class="card-head"><div><div class="section-kicker">ASSEMBLY LAYOUT</div><h2>双层底盘 · 3D 装配示意</h2></div><div class="small-note">底盘上层板约 228 × 148 mm</div></div>
           <p class="panel-lead">装配图按你给的双层底盘实物结构更新：上层板放 NUCLEO-F446RE 和前视 MaixCAM2；中层放 3S 电池、AT8236 双路电机驱动板和 MP2491C 稳压模块；八路循线阵列位于底盘中心下方、感应面朝地。底盘外形和安装孔仍需按实物复核。</p>
           <div class="assembly-layout-grid">
-            <figure class="diagram-frame"><img src="figure/assembly-layout-3d-v6.png" alt="双层循迹避障车 3D 装配图：顶层为 NUCLEO-F446RE 和车头 MaixCAM2，中层为电池、AT8236 和 MP2491C，八路循线阵列居中安装在车底朝下。"></figure>
+            <figure class="diagram-frame"><img src="figure/assembly-layout-3d-v7.png" alt="双层循迹避障车平行投影 3D 装配图：顶层 NUCLEO-F446RE，前端中心安装 MaixCAM2 并与一对小万向轮同端，中层为电池、AT8236 和 MP2491C，后端为同轴大驱动轮，八路循线阵列位于车底中央朝下。"></figure>
             <div class="assembly-key" aria-label="双层小车各层部件位置">
               <div class="assembly-key-item"><span class="assembly-deck-label">顶层</span><span><b>NUCLEO-F446RE + MaixCAM2</b><br>主控板平放在上层；相机安装在车头，镜头向前。</span></div>
               <div class="assembly-key-item"><span class="assembly-deck-label middle">中层</span><span><b>3S 电池 + AT8236 + MP2491C</b><br>电池固定在中层，驱动板和稳压模块并排安装。</span></div>
@@ -472,14 +472,14 @@
               <div class="assembly-key-item"><span class="assembly-deck-label middle">待装</span><span><b>SEN0628 ToF</b><br>后续采购；本次装配渲染不把未到货 ToF 画成实物。</span></div>
             </div>
           </div>
-          <p class="diagram-caption">主图和三视图按实际双层结构生成，用于核对部件上下层关系，不是 CAD 加工图。实物孔位、支架高度、线束固定和比赛外廓，仍需按到货底盘复核。</p>
+          <p class="diagram-caption">主图使用平行等轴测投影，保持上下层板平行；相机和一对小万向轮在前端，两只大驱动轮在后端同轴。图用于核对结构和部件上下层关系，不是 CAD 加工图；实物孔位、支架高度、线束固定和比赛外廓仍需按到货底盘复核。</p>
           <section class="assembly-views-section" aria-labelledby="assembly-views-title">
             <div class="section-kicker">ORTHOGRAPHIC VIEWS</div>
             <h3 id="assembly-views-title">双层小车三视图</h3>
             <p>正视、俯视和侧视共用同一双层布局：主控与相机在上层，电池和驱动稳压模块在中层，循线阵列在车底中央。</p>
             <div class="assembly-views-grid">
               <figure class="assembly-view-card"><img src="figure/car-three-view-front.png" alt="双层小车正视图：顶层 MaixCAM2 和 NUCLEO，中层电池、AT8236 和 MP2491C，车底中央是八路循线阵列。" loading="lazy"><figcaption>正视图 · 摄像头朝前，双层结构清楚可见</figcaption></figure>
-              <figure class="assembly-view-card"><img src="figure/car-three-view-top.png" alt="双层小车俯视图：NUCLEO-F446RE 和 MaixCAM2 位于顶层，电池、AT8236 和 MP2491C 位于其下方中层。" loading="lazy"><figcaption>俯视图 · 顶层板与中层部件位置</figcaption></figure>
+              <figure class="assembly-view-card"><img src="figure/car-three-view-top.png" alt="双层小车俯视图：前端中心为 MaixCAM2 和一对小万向轮，后端为同轴驱动轮；顶层 NUCLEO-F446RE，中层电池、AT8236 和 MP2491C，循线阵列在前部中央朝下。" loading="lazy"><figcaption>俯视图 · 相机与万向轮同端，驱动轮后置同轴</figcaption></figure>
               <figure class="assembly-view-card"><img src="figure/car-three-view-side.png" alt="双层小车侧视图：上层 NUCLEO 和 MaixCAM2，中层电池及驱动稳压模块，底部八路循线阵列朝下。" loading="lazy"><figcaption>侧视图 · 上下层板由铜柱支撑</figcaption></figure>
             </div>
           </section>
