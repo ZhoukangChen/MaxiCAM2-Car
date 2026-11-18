@@ -171,6 +171,12 @@
     .assembly-layout-grid { display: grid; grid-template-columns: minmax(0,1.35fr) minmax(270px,.65fr); gap: 14px; padding: 0 20px; align-items: start; }
     .assembly-layout-grid .diagram-frame { display: flex; align-items: center; justify-content: center; margin: 0; background: #f5f4f0; }
     .assembly-layout-grid .diagram-frame img { width: auto; max-width: 100%; max-height: 700px; object-fit: contain; }
+    .mounting-check { margin: 22px 20px 0; padding-top: 18px; border-top: 1px solid var(--line); }
+    .mounting-check h3 { margin: 5px 0 7px; font-size: 16px; }
+    .mounting-check > p { margin: 0; color: #9fb0c6; font-size: 12px; line-height: 1.65; }
+    .mounting-check .diagram-frame { margin: 12px 0 0; background: #eef3f8; }
+    .mounting-check .diagram-frame a { display: block; }
+    .mounting-check .diagram-frame img { display: block; width: 100%; height: auto; }
     .assembly-key { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
     .assembly-key-item { display: flex; align-items: flex-start; gap: 8px; min-width: 0; padding: 9px; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,.025); color: #dce8f8; font-size: 10px; line-height: 1.45; }
     .assembly-key-item b { color: #f0f5ff; font-size: 10px; }
@@ -334,6 +340,7 @@
       .wiring-card.wide { grid-column: auto; }
       .assembly-layout-grid { padding-left: 10px; padding-right: 10px; }
       .assembly-layout-grid .diagram-frame img { max-height: 560px; }
+      .mounting-check { margin: 20px 10px 0; }
       .assembly-key { grid-template-columns: 1fr; }
       .wiring-note-grid { grid-template-columns: 1fr; margin-left: 10px; margin-right: 10px; }
       .power-page-grid { padding-left: 10px; padding-right: 10px; }
@@ -458,6 +465,17 @@
             </div>
           </div>
           <p class="diagram-caption">主图显示两只 65 mm 驱动轮共轴、左右对称，另有一只位于车尾中心线上的万向轮；底视小图表示八个光电头朝地面、阵列中心与车体中心线对齐。Gravity IO 保留在清单中但未画入车体图。此图是 image-gen 装配示意，不是 CAD 加工图；加工前按到货实物孔位和比赛外廓复核。</p>
+          <section class="mounting-check" aria-labelledby="mounting-check-title">
+            <div class="section-kicker">MOUNTING HOLE CHECK</div>
+            <h3 id="mounting-check-title">NUCLEO-F446RE 与底盘孔位对照</h3>
+            <p>橙色 A / B 是底盘俯视截图中估出的候选孔，蓝色 1 / 2 是 NUCLEO 板上的两只固定孔。点击图片可以放大。</p>
+            <figure class="diagram-frame">
+              <a href="figure/nucleo-chassis-hole-comparison.png" target="_blank" rel="noopener">
+                <img src="figure/nucleo-chassis-hole-comparison.png" alt="底盘和 NUCLEO-F446RE 固定孔位对照：底盘候选孔以橙色 A、B 标出，NUCLEO 两只安装孔以蓝色 1、2 标出；底盘孔位为截图比例估测。" loading="lazy">
+              </a>
+            </figure>
+            <p class="diagram-caption">A / B 是从底盘截图和 228 × 148 mm 外形比例估出的候选点，不是已确认的加工孔位。将 NUCLEO 实物按方向放到底盘上，确认 1 / 2 能否同时落在候选孔或长槽内；只对上一个时先不要钻孔。</p>
+          </section>
         </div>
       </section>
 

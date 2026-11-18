@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" role="img" aria-labelledby="title desc">
+  <title id="title">相机视野叠加的路线与障碍物识别</title>
+  <desc id="desc">叠加在白色地面和黑色弯曲路线上的识别结果：绿色路线中心、青色车宽安全边界、红色障碍物检测框。</desc>
+  <defs>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <style>
+      text{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
+      .tag{font-size:18px;font-weight:800;letter-spacing:.2px}
+    </style>
+  </defs>
+
+  <!-- 两条虚线按车宽和安全余量扩展，远处随透视收窄 -->
+  <path d="M548 1024 C548 875 562 801 535 736 C497 650 430 593 443 511 C455 434 576 382 736 333 C883 289 1004 255 1010 198 C1000 130 820 45 680 15 L840 0 C1000 45 1140 130 1140 204 C1140 264 1127 309 1003 348 C880 391 780 445 773 516 C772 586 867 642 917 730 C974 800 972 862 972 1024 Z" fill="#48cde4" fill-opacity=".11"/>
+  <path d="M548 1024 C548 875 562 801 535 736 C497 650 430 593 443 511 C455 434 576 382 736 333 C883 289 1004 255 1010 198 C1000 130 820 45 680 15" fill="none" stroke="#079bb7" stroke-width="7" stroke-linecap="round" stroke-dasharray="18 14" filter="url(#glow)"/>
+  <path d="M972 1024 C972 862 974 800 917 730 C867 642 772 586 773 516 C780 445 880 391 1003 348 C1127 309 1140 264 1140 204 C1140 130 1000 45 840 0" fill="none" stroke="#079bb7" stroke-width="7" stroke-linecap="round" stroke-dasharray="18 14" filter="url(#glow)"/>
+
+  <!-- 识别出的黑线中心轨迹 -->
+  <path d="M760 1024 C760 862 762 800 729 730 C687 642 592 586 601 516 C610 445 730 391 873 348 C1005 309 1050 264 1050 204 C1030 128 900 35 760 0" fill="none" stroke="#41d99c" stroke-width="8" stroke-linecap="round" stroke-dasharray="3 19" filter="url(#glow)"/>
+
+  <!-- 障碍物轮廓框：位置贴合模拟相机底图 -->
+  <g fill="none" stroke="#ee4557" stroke-width="7">
+    <rect x="177" y="30" width="322" height="204" rx="8"/>
+    <rect x="47" y="318" width="458" height="310" rx="8"/>
+    <rect x="1193" y="53" width="220" height="293" rx="8"/>
+  </g>
+  <g>
+    <rect x="177" y="30" width="245" height="40" rx="8" fill="#cf3348"/>
+    <text x="195" y="57" class="tag" fill="#fff">障碍物 02 · 轮廓</text>
+    <rect x="47" y="318" width="245" height="40" rx="8" fill="#cf3348"/>
+    <text x="65" y="345" class="tag" fill="#fff">障碍物 01 · 轮廓</text>
+    <rect x="1193" y="53" width="245" height="40" rx="8" fill="#cf3348"/>
+    <text x="1211" y="80" class="tag" fill="#fff">障碍物 03 · 轮廓</text>
+  </g>
+
+  <!-- 路线和车宽标记 -->
+  <g>
+    <rect x="779" y="402" width="220" height="43" rx="9" fill="#11382d" fill-opacity=".92" stroke="#41d99c" stroke-width="2"/>
+    <circle cx="801" cy="423" r="6" fill="#41d99c"/>
+    <text x="817" y="430" class="tag" fill="#e7fff4">路线中心</text>
+    <rect x="38" y="790" width="330" height="48" rx="10" fill="#073442" fill-opacity=".94" stroke="#079bb7" stroke-width="2"/>
+    <text x="203" y="821" text-anchor="middle" class="tag" fill="#e3fbff">车体最大宽度 + 安全余量</text>
+  </g>
+</svg>
