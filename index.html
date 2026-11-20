@@ -383,18 +383,18 @@
           <div class="brand-sub">硬件规划 · 任务跟踪</div>
         </div>
       </div>
-      <div class="top-status"><span class="status-dot" aria-hidden="true"></span>当前选型 · 需实物验证</div>
+      <div class="top-status"><span class="status-dot" aria-hidden="true"></span>台架联调 · 动力供电待测</div>
     </header>
 
     <section class="intro" aria-labelledby="page-title">
       <div class="eyebrow">AUTONOMOUS TRACKING ROBOT</div>
       <h1 id="page-title">先把车跑稳，再把绕障做好。</h1>
-      <p class="intro-copy">当前方案采用 MaixCAM2 4GB + 2K OS04D10 前视识别、已到货的八路下视循线模块和 NUCLEO-F446RE 实时控制。循线板与稳压板的具体型号、接口及输出仍待拆封核对；动力部件已到货，接线和参数尚未验证。</p>
+      <p class="intro-copy">目前 MaixCAM2 与 NUCLEO-F446RE 的串口链路已验证，YB-MUX04-2.0 八路循线板已校准并完成八路响应扫描，AT8236 控制线也已接到主控。电池动力支路还没有上电；下一步先用万用表确认电池和稳压输出，再决定安全的电机供电接法。</p>
       <div class="stats" aria-label="当前规划摘要">
         <span class="chip"><b>01</b>MaixCAM2 + OS04D10 2K 主视觉</span>
         <span class="chip"><b>02</b>NUCLEO-F446RE 实时控制</span>
-        <span class="chip"><b>03</b>八路循线已到货 · 型号待核 / SEN0628 待购</span>
-        <span class="chip"><b>04</b>3S 6000mAh 电池已到货 · 稳压输出待测</span>
+        <span class="chip"><b>03</b>YB-MUX04-2.0 · 校准与八路响应通过</span>
+        <span class="chip"><b>04</b>3S 6000mAh · 标签最高 12.6V，待测</span>
       </div>
     </section>
 
@@ -418,13 +418,18 @@
           <div class="overview-layout">
             <div class="overview-copy">
               <h3>当前硬件路线</h3>
-              <p>MaixCAM2 4GB + 2K OS04D10 负责前向视觉；已到货的八路模块用于近地循迹，但实物型号和接口待核；SEN0628 是后续待购的 8×8 ToF。F446RE 读取编码器并控制左右电机。</p>
+              <p>MaixCAM2 4GB + 2K OS04D10 负责前向视觉；YB-MUX04-2.0 已固定在车底中央，完成黑白校准和八路响应扫描；SEN0628 是后续待购的 8×8 ToF。F446RE 负责循迹输入和电机控制。</p>
               <ul class="overview-points">
                 <li><b>主控分工：</b>视觉板识别路线和障碍物，F446RE 负责实时转向、速度和停车。</li>
                 <li><b>驱动结构：</b>两轮差速，包装标注 2 个 1:56、带码盘的 520 减速电机，配 65 mm 轮胎；电机额定电压和编码器计数待核。</li>
-                <li><b>供电原则：</b>已到货的 3S 6000mAh 电池计划直供 AT8236；稳压模块输出布局仍需核对实物并用万用表测量。</li>
+                <li><b>电机供电：</b>电池标称 11.1V、满电最高 12.6V；AT8236 板上和 Yahboom 产品页标注输入 5–12V，因此不能把满电电池直接接到 VM。</li>
+                <li><b>稳压输出：</b>板上已装 NUCLEO、AT8236、YB-MVP01-V1.0 降压板和 YB-MPP01-V2.0 电源扩展板；输出电压、负载能力和电池分线尚未实测。</li>
                 <li><b>底盘结构：</b>采用双层铝合金底盘，商品图标注上层板约 228 × 148 mm；组装后仍需按比赛限尺寸复核外廓。</li>
-              </ul>
+            </ul>
+            <div class="wiring-note-grid">
+              <div class="wiring-note"><strong>已验证：</strong>八路板白底读数为 0xFF，黑带扫过时各通道位会变化；MaixCAM2—NUCLEO UART 通信通过。</div>
+              <div class="wiring-note warn"><strong>未上电：</strong>AT8236 的 VM 和电机动力尚未测试。先量电池、再量稳压板各输出；不要把 12.6V 满电电池直接接到标称上限 12V 的驱动板。</div>
+            </div>
             </div>
             <figure class="vehicle-stage" aria-label="循迹避障小车双层底盘 3D 装配图">
               <img src="figure/assembly-layout-3d-v7.png" alt="双层循迹避障车平行投影 3D 装配图：前端中心的 MaixCAM2 与一对小万向轮、上层 NUCLEO-F446RE、中层电池与驱动稳压板、后端同轴两只大驱动轮，以及车底中央朝下的八路循线阵列。">
@@ -461,12 +466,12 @@
       <section class="page-panel" id="panel-assembly" data-page-panel="assembly" role="tabpanel" tabindex="0" aria-labelledby="tab-assembly" hidden>
         <div class="card">
           <div class="card-head"><div><div class="section-kicker">ASSEMBLY LAYOUT</div><h2>双层底盘 · 3D 装配示意</h2></div><div class="small-note">底盘上层板约 228 × 148 mm</div></div>
-          <p class="panel-lead">装配图按你给的双层底盘实物结构更新：上层板放 NUCLEO-F446RE 和前视 MaixCAM2；中层放 3S 电池、AT8236 双路电机驱动板和 MP2491C 稳压模块；八路循线阵列位于底盘中心下方、感应面朝地。底盘外形和安装孔仍需按实物复核。</p>
+          <p class="panel-lead">装配图按你给的双层底盘实物结构更新：上层板放 NUCLEO-F446RE 和前视 MaixCAM2；中层放 3S 电池、AT8236 双路电机驱动板、YB-MVP01-V1.0 降压板和 YB-MPP01-V2.0 电源扩展板；八路循线阵列位于底盘中心下方、感应面朝地。底盘外形和安装孔仍需按实物复核。</p>
           <div class="assembly-layout-grid">
-            <figure class="diagram-frame"><img src="figure/assembly-layout-3d-v7.png" alt="双层循迹避障车平行投影 3D 装配图：顶层 NUCLEO-F446RE，前端中心安装 MaixCAM2 并与一对小万向轮同端，中层为电池、AT8236 和 MP2491C，后端为同轴大驱动轮，八路循线阵列位于车底中央朝下。"></figure>
+            <figure class="diagram-frame"><img src="figure/assembly-layout-3d-v7.png" alt="双层循迹避障车平行投影 3D 装配图：顶层 NUCLEO-F446RE，前端中心安装 MaixCAM2 并与一对小万向轮同端，中层为电池、AT8236 和两块稳压 / 电源板，后端为同轴大驱动轮，八路循线阵列位于车底中央朝下。"></figure>
             <div class="assembly-key" aria-label="双层小车各层部件位置">
               <div class="assembly-key-item"><span class="assembly-deck-label">顶层</span><span><b>NUCLEO-F446RE + MaixCAM2</b><br>主控板平放在上层；相机安装在车头，镜头向前。</span></div>
-              <div class="assembly-key-item"><span class="assembly-deck-label middle">中层</span><span><b>3S 电池 + AT8236 + MP2491C</b><br>电池固定在中层，驱动板和稳压模块并排安装。</span></div>
+              <div class="assembly-key-item"><span class="assembly-deck-label middle">中层</span><span><b>3S 电池 + AT8236 + YB-MVP01 + YB-MPP01</b><br>两块电源板已安装，输出接法仍待核对和测量。</span></div>
               <div class="assembly-key-item"><span class="assembly-deck-label bottom">车底</span><span><b>八路循线阵列</b><br>位于车体中心线下方，感应面朝向地面。</span></div>
               <div class="assembly-key-item"><span class="assembly-deck-label">动力</span><span><b>520 编码电机 ×2</b><br>1:56 减速比，配 65 mm 驱动轮；万向轮按底盘套件安装。</span></div>
               <div class="assembly-key-item"><span class="assembly-deck-label middle">待装</span><span><b>SEN0628 ToF</b><br>后续采购；本次装配渲染不把未到货 ToF 画成实物。</span></div>
@@ -478,8 +483,8 @@
             <h3 id="assembly-views-title">双层小车三视图</h3>
             <p>正视、俯视和侧视共用同一双层布局：主控与相机在上层，电池和驱动稳压模块在中层，循线阵列在车底中央。</p>
             <div class="assembly-views-grid">
-              <figure class="assembly-view-card"><img src="figure/car-three-view-front.png" alt="双层小车正视图：顶层 MaixCAM2 和 NUCLEO，中层电池、AT8236 和 MP2491C，车底中央是八路循线阵列。" loading="lazy"><figcaption>正视图 · 摄像头朝前，双层结构清楚可见</figcaption></figure>
-              <figure class="assembly-view-card"><img src="figure/car-three-view-top.png" alt="双层小车俯视图：前端中心为 MaixCAM2 和一对小万向轮，后端为同轴驱动轮；顶层 NUCLEO-F446RE，中层电池、AT8236 和 MP2491C，循线阵列在前部中央朝下。" loading="lazy"><figcaption>俯视图 · 相机与万向轮同端，驱动轮后置同轴</figcaption></figure>
+              <figure class="assembly-view-card"><img src="figure/car-three-view-front.png" alt="双层小车正视图：顶层 MaixCAM2 和 NUCLEO，中层电池、AT8236 和两块电源板，车底中央是八路循线阵列。" loading="lazy"><figcaption>正视图 · 摄像头朝前，双层结构清楚可见</figcaption></figure>
+              <figure class="assembly-view-card"><img src="figure/car-three-view-top.png" alt="双层小车俯视图：前端中心为 MaixCAM2 和一对小万向轮，后端为同轴驱动轮；顶层 NUCLEO-F446RE，中层电池、AT8236 和两块电源板，循线阵列在前部中央朝下。" loading="lazy"><figcaption>俯视图 · 相机与万向轮同端，驱动轮后置同轴</figcaption></figure>
               <figure class="assembly-view-card"><img src="figure/car-three-view-side.png" alt="双层小车侧视图：上层 NUCLEO 和 MaixCAM2，中层电池及驱动稳压模块，底部八路循线阵列朝下。" loading="lazy"><figcaption>侧视图 · 上下层板由铜柱支撑</figcaption></figure>
             </div>
           </section>
@@ -505,19 +510,19 @@
             <table class="module-table">
               <thead><tr><th>序号</th><th>部件 / 数量</th><th>建议规格</th><th>用途与核对项</th><th>状态</th></tr></thead>
               <tbody>
-                <tr><td>1</td><td>视觉相机 ×1</td><td>MaixCAM2 · 4GB + OS04D10 2K</td><td>前向路线与障碍物识别；按商家标称 5V/1A，计划由确认过的稳压模块固定 5V 经 USB-C 供电引线供电。</td><td><span class="status-pill owned">已购</span></td></tr>
-                <tr><td>2</td><td>主控板 ×1</td><td>NUCLEO-F446RE</td><td>编码器采集、电机闭环、避障动作；计划由确认过的稳压模块 VADJ 设约 7.5V 后接 VIN（CN7-24）。</td><td><span class="status-pill owned">已有</span></td></tr>
+                <tr><td>1</td><td>视觉相机 ×1</td><td>MaixCAM2 · 4GB + OS04D10 2K</td><td>前向路线与障碍物识别。相机有内置电池；当前台架由相机自身供电，USB-C 接电脑用于数据连接 / 充电，UART 与 NUCLEO 单独连接。</td><td><span class="status-pill owned">已购 · UART 已联通</span></td></tr>
+                <tr><td>2</td><td>主控板 ×1</td><td>NUCLEO-F446RE</td><td>当前由 ST-LINK mini-USB 供电；以后若改外部 VIN，输入须为 7–12V，并按板卡手册检查电源跳线。</td><td><span class="status-pill owned">已有 · 台架运行</span></td></tr>
                 <tr><td>3</td><td>传感器扩展板 ×1</td><td>DFRobot Gravity IO</td><td>可作传感器接线转接；本页按 NUCLEO 针脚直接分配。若要让信号先接入扩展板，需按你手中板型核对接口和电平。</td><td><span class="status-pill owned">已有</span></td></tr>
                 <tr><td>4</td><td>多区 ToF ×1</td><td>DFRobot SEN0628 · VL53L7CX · 8×8</td><td>提供距离和左右分区信息，配合相机判断障碍物位置；未列入本批采购。</td><td><span class="status-pill">后续待采购</span></td></tr>
-                <tr><td>5</td><td>下视循迹模块 ×1</td><td>包装标注“八路巡线模块”；具体型号待核</td><td>照片确认八路板到货，但未见 YB-MUX04-2.0 型号。需核对板上丝印、供电电压、接口针序、UART/I²C 协议与信号电平后再接线。</td><td><span class="status-pill verify">已到货 · 待核型号</span></td></tr>
+                <tr><td>5</td><td>下视循迹模块 ×1</td><td>Yahboom YB-MUX04-2.0 · 八路</td><td>已按 5V、GND、SCL、SDA 接 NUCLEO；黑白校准完成，白底 0xFF，扫过黑带时八个通道位均有响应。真实赛道循迹还未测试。</td><td><span class="status-pill owned">已安装 · 台架通过</span></td></tr>
                 <tr><td>6</td><td>520 编码减速电机 ×2</td><td>包装标注 1:56、520 减速电机（带码盘）</td><td>额定电压、编码器每圈计数和堵转电流未出现在到货标签中，需看电机铭牌或实测；照片另见 65mm 轮胎、固定支架及 6mm 孔联轴器。</td><td><span class="status-pill verify">已到货 · 参数待核</span></td></tr>
-                <tr><td>7</td><td>双路电机驱动板 ×1</td><td>AT8236 模块带稳压版 · VM 5–17V</td><td>包装标签确认 AT8236 带稳压版本；开箱后仍需核对端子丝印和板上版本。规划规格为每路 3A 连续、6A 峰值，接收 3.3V 控制信号。</td><td><span class="status-pill owned">已到货</span></td></tr>
+                <tr><td>7</td><td>双路电机驱动板 ×1</td><td>AT8236 带稳压版 · 板级输入按 5–12V</td><td>控制信号和 GND 已接 NUCLEO D3–D6 / GND；VM 未上电。商家参数表另列 VM 5–17V，但板上端子丝印及 <a href="https://category.yahboom.net/products/dual-md-module" target="_blank" rel="noopener">Yahboom 产品页</a>为 5–12V；在厂家确认本板版本前按较低上限执行。12.6V 满电电池不可直连。</td><td><span class="status-pill verify">已安装 · 动力待测</span></td></tr>
                 <tr><td>8</td><td>车载电池组 ×1</td><td>标签：6000mAh · 11.1V 标称 / 12.6V 最高</td><td>标签还标注额定电流 6A、最大放电 10A、截止放电 8.1V、T 型放电口、DC4.0×1.7 充电口。标签未说明 2P 结构；保护板和均衡功能仍需核实。</td><td><span class="status-pill owned">已到货</span></td></tr>
                 <tr><td>9</td><td>配套充电器 ×1</td><td>GPDA3L-12602000C · 输出 12.6V / 2A</td><td>照片标签标注 DC4.0×1.7 输出；使用前核对与电池充电口匹配，并按电池卖家说明充电。</td><td><span class="status-pill owned">已到货</span></td></tr>
-                <tr><td>10</td><td>可调稳压模块 ×1</td><td>包装标注“可调稳压电源模块”；计划核对 MP2491C</td><td>照片未显示芯片和端子规格，不能仅凭包装认定为 MP2491C / YB-MVP01-V1.0；拆封后核对型号、输入范围和各路输出，再决定供电分配。</td><td><span class="status-pill verify">已到货 · 型号待核</span></td></tr>
-                <tr><td>11</td><td>5V 相机供电线 ×1</td><td>稳压板固定 5V → USB-C 5V 输入</td><td>本批照片未见该线；需要带 USB-C 电源识别/CC 电阻的固定 5V 供电引线，不用输出 9V 的 PD 触发线。</td><td><span class="status-pill">本批照片未见</span></td></tr>
+                <tr><td>10</td><td>可调稳压模块 ×1</td><td>Yahboom YB-MVP01-V1.0 · DC6–24V 输入</td><td>板上标有 VADJ 1.2–24V、固定 5V、固定 3.3V 输出；各路空载实测值和可带电流尚未记录。VADJ 调到目标值并测准之前，不接 NUCLEO 或其他负载。</td><td><span class="status-pill verify">已安装 · 输出待测</span></td></tr>
+                <tr><td>11</td><td>电池分线与保护线束</td><td>T 型插头分支线、保险丝与总开关</td><td>电池只有一个 T 型输出口；分支方式、极性、保险丝和线束额定电流需核实，未确认前不同时给多块板上电。相机台架供电不依赖此线束。</td><td><span class="status-pill verify">待核线束</span></td></tr>
                 <tr><td>12</td><td>电源 / 机械安装辅件</td><td>照片见 T 型电源线、65mm 轮胎 ×2、520 支架 ×2 包、6mm/L18mm 联轴器 ×2、螺丝铜柱包</td><td>轮胎、支架、联轴器和线束均已拍照登记；T 型线图片可见 3 包，实物数量待点数。总开关、保险丝与座、后万向轮等本批照片未见。</td><td><span class="status-pill partial">部分到货</span></td></tr>
-                <tr><td>13</td><td>电源扩展板 ×1</td><td>外包装标注“机器人稳压电源扩展板”</td><td>照片未显示板上型号、端子和用途；与可调稳压模块的关系待开箱确认，确认前不纳入接线方案。</td><td><span class="status-pill verify">已到货 · 用途待核</span></td></tr>
+                <tr><td>13</td><td>电源扩展板 ×1</td><td>Yahboom YB-MPP01-V2.0</td><td>已安装。该板的具体输入 / 输出接法及是否作为 5V 支路仍需按 PCB 丝印和说明核对；目前不把它与 YB-MVP01 的同电压输出并联。</td><td><span class="status-pill verify">已安装 · 接法待核</span></td></tr>
               </tbody>
             </table>
           </div>
@@ -526,7 +531,7 @@
               <div><div class="section-kicker">RECEIVED ITEMS · 2026-11-14</div><h3 id="arrival-title">本批到货照片与标签记录</h3></div>
               <span class="status-pill owned">14 张原图已归档</span>
             </div>
-            <p class="arrival-intro">照片已存入 <code>figure/arrivals_20261114/</code>。每张缩略图可点开原图；到货记录只依据包装标签和可见数量，不代表已经安装、通电或完成性能测试。</p>
+            <p class="arrival-intro">照片已存入 <code>figure/arrivals_20261114/</code>。每张缩略图可点开原图；下方保留到货时的包装记录，后续开箱、安装和台架测试结果以本页“接线图 / 电源分配”中的状态为准。</p>
             <div class="arrival-grid">
               <article class="arrival-card">
                 <div class="arrival-photo-pair">
@@ -552,19 +557,19 @@
               </article>
               <article class="arrival-card">
                 <a class="arrival-photo-link" href="figure/arrivals_20261114/power_expansion_board_package.jpg" target="_blank" rel="noopener"><img src="figure/arrivals_20261114/power_expansion_board_package.jpg" alt="机器人稳压电源扩展板包装标签" loading="lazy"></a>
-                <div class="arrival-copy"><span class="status-pill verify">已到货 ×1 · 用途待核</span><h4>稳压电源扩展板</h4><p>包装标注“机器人稳压电源扩展板”；板上型号、端口和功能需开箱确认。</p></div>
+                <div class="arrival-copy"><span class="status-pill verify">已安装 ×1 · 接法待核</span><h4>YB-MPP01-V2.0 电源扩展板</h4><p>板上型号已确认；各端子用途和与 YB-MVP01 的电源关系仍待按丝印核对、测量。</p></div>
               </article>
               <article class="arrival-card">
                 <a class="arrival-photo-link" href="figure/arrivals_20261114/at8236_package.jpg" target="_blank" rel="noopener"><img src="figure/arrivals_20261114/at8236_package.jpg" alt="AT8236模块带稳压版包装标签" loading="lazy"></a>
-                <div class="arrival-copy"><span class="status-pill owned">已到货 ×1</span><h4>AT8236 双路电机驱动板</h4><p>包装标注“AT8236 模块带稳压版”；到手后核对板上端子和版本。</p></div>
+                <div class="arrival-copy"><span class="status-pill owned">已安装 ×1</span><h4>AT8236 双路电机驱动板</h4><p>控制输入线和 GND 已接主控；VM 仍未上电，电机方向、PWM 和编码器尚未测试。</p></div>
               </article>
               <article class="arrival-card">
                 <a class="arrival-photo-link" href="figure/arrivals_20261114/adjustable_regulator_package.jpg" target="_blank" rel="noopener"><img src="figure/arrivals_20261114/adjustable_regulator_package.jpg" alt="可调稳压电源模块包装标签" loading="lazy"></a>
-                <div class="arrival-copy"><span class="status-pill verify">已到货 ×1 · 型号待核</span><h4>可调稳压模块</h4><p>包装为通用描述；拆封核对芯片型号、输入范围及 VADJ、5V、3.3V 输出端子。</p></div>
+                <div class="arrival-copy"><span class="status-pill verify">已安装 ×1 · 输出待测</span><h4>YB-MVP01-V1.0 可调稳压模块</h4><p>板上标注 DC6–24V 输入、VADJ 1.2–24V、固定 5V 和 3.3V 输出；万用表尚未记录实测值。</p></div>
               </article>
               <article class="arrival-card">
                 <a class="arrival-photo-link" href="figure/arrivals_20261114/line_sensor_8way_package.jpg" target="_blank" rel="noopener"><img src="figure/arrivals_20261114/line_sensor_8way_package.jpg" alt="八路巡线模块包装及电路板" loading="lazy"></a>
-                <div class="arrival-copy"><span class="status-pill verify">已到货 ×1 · 型号待核</span><h4>八路下视循线模块</h4><p>包装只标“八路巡线模块”；开箱核对板上型号、插口针序、供电与通信协议。</p></div>
+                <div class="arrival-copy"><span class="status-pill owned">已安装 · 校准通过</span><h4>YB-MUX04-2.0 八路下视循线模块</h4><p>使用 I²C 接口；黑白校准和八路响应扫描已通过。真实赛道上的循迹性能仍待测试。</p></div>
               </article>
               <article class="arrival-card">
                 <a class="arrival-photo-link" href="figure/arrivals_20261114/encoder_motors_1_56.jpg" target="_blank" rel="noopener"><img src="figure/arrivals_20261114/encoder_motors_1_56.jpg" alt="两台1比56、520减速比并带码盘的减速电机" loading="lazy"></a>
@@ -583,7 +588,7 @@
                 <div class="arrival-copy"><span class="status-pill owned">照片显示 ×2</span><h4>六角联轴器</h4><p>标签标注 6mm 孔、18mm 长；拆包后核对电机轴和轮毂的配合。</p></div>
               </article>
             </div>
-            <div class="arrival-footnote"><strong>本批照片未见：</strong>MaixCAM2 固定 5V 转 USB-C 供电引线、总开关、保险丝与保险丝座、后万向轮。若这些物品在其他包裹中已到，请补发照片后再登记。当前 ToF SEN0628 仍为后续待购。</div>
+            <div class="arrival-footnote"><strong>后续待核：</strong>电池 T 型分线线束、保险丝与总开关是否齐全；相机已确认有内置电池，当前台架不需要另接车载 5V USB-C 供电线。ToF SEN0628 仍为后续待购。</div>
           </section>
         </div>
       </section>
@@ -591,44 +596,24 @@
       <!-- 中文注释：接线页按 NUCLEO-F446RE 的 CN7/CN10 Morpho 针脚和 CN5/CN8/CN9 Arduino 针脚列出信号。 -->
       <section class="page-panel" id="panel-wiring" data-page-panel="wiring" role="tabpanel" tabindex="0" aria-labelledby="tab-wiring" hidden>
         <div class="card">
-          <div class="card-head"><div><div class="section-kicker">PIN-LEVEL WIRING</div><h2>NUCLEO-F446RE 针脚接线图</h2></div><div class="small-note">到货后按实物复核 · 循线模块接口待核</div></div>
-          <p class="panel-lead">相机 UART、AT8236 控制输入和编码器已按器件规划针脚。八路巡线模块的包装未标型号，表中的 UART 针脚仅作预留；确认实物接口、供电和电平前不要接入。</p>
+          <div class="card-head"><div><div class="section-kicker">PIN-LEVEL WIRING</div><h2>NUCLEO-F446RE 针脚接线图</h2></div><div class="small-note">相机 UART 与循线 I²C 已通 · AT8236 控制线已接</div></div>
+          <p class="panel-lead">目前相机 UART 与八路循线板 I²C 都完成了台架通信测试；AT8236 的四根控制输入线和 GND 已按下图接好。电池、VM 动力支路和电机转动测试尚未进行。</p>
           <!-- 中文注释：先用官方针脚图确定相机与主控的实体孔位，再接其他外设。 -->
           <figure class="diagram-frame wiring-diagram"><img src="figure/wiring-maixcam2-nucleo-uart.png" alt="MaixCAM2 与 NUCLEO-F446RE 官方针脚图及三线连接图，标出 MaixCAM2 U2T、U2R、GND 与 NUCLEO CN10-33、CN10-21、CN10-20。"></figure>
-          <p class="diagram-caption">首次台架连接先只接这三根线：MaixCAM2 U2T → NUCLEO CN10-33，NUCLEO CN10-21 → MaixCAM2 U2R，GND → GND。两块板先断电，接好后分别用 USB 供电；车上运行时再按单电池供电方案接电。</p>
-          <figure class="diagram-frame wiring-diagram"><img src="figure/wiring-hardware-connections.png" alt="image-gen 生成的实物接线示意图：彩色线束连接 MaixCAM2、NUCLEO-F446RE、八路循线模块、AT8236、电机、MP2491C 和电池；ToF 使用虚线表示后续接入。"></figure>
-          <p class="diagram-caption">先用下方编号和线色找到模块、辨认线束，再按后面的针脚表接线。图中稳压板按原计划的 MP2491C 绘制，本批到货模块型号尚未确认；图像只用于显示计划线束关系，接线前以实物丝印和输出实测为准。</p>
-          <div class="wiring-visual-grid" aria-label="接线图编号和线色说明">
-            <section class="wiring-visual-card">
-              <h3>图中编号对应模块</h3>
-              <div class="wiring-image-key">
-                <div class="wiring-image-key-item"><span class="assembly-key-number">1</span><span>MaixCAM2 相机</span></div>
-                <div class="wiring-image-key-item"><span class="assembly-key-number">2</span><span>NUCLEO-F446RE</span></div>
-                <div class="wiring-image-key-item"><span class="assembly-key-number">3</span><span>八路循线模块（型号待核）</span></div>
-                <div class="wiring-image-key-item"><span class="assembly-key-number">4</span><span>AT8236 双路驱动</span></div>
-                <div class="wiring-image-key-item"><span class="assembly-key-number">5</span><span>编码电机 ×2</span></div>
-                <div class="wiring-image-key-item"><span class="assembly-key-number">6</span><span>稳压模块（型号待核）</span></div>
-                <div class="wiring-image-key-item"><span class="assembly-key-number">7</span><span>3S 电池组</span></div>
-                <div class="wiring-image-key-item"><span class="assembly-key-number">8</span><span>SEN0628 ToF（后续待购）</span></div>
-              </div>
-            </section>
-            <section class="wiring-visual-card">
-              <h3>线色表示的连接组</h3>
-              <div class="wire-color-key">
-                <div class="wire-color-item"><span class="wire-swatch"></span><span>红：电源正极</span></div>
-                <div class="wire-color-item"><span class="wire-swatch black"></span><span>黑：GND 共地</span></div>
-                <div class="wire-color-item"><span class="wire-swatch green"></span><span>绿：相机 UART</span></div>
-                <div class="wire-color-item"><span class="wire-swatch cyan"></span><span>青：循线 UART</span></div>
-                <div class="wire-color-item"><span class="wire-swatch orange"></span><span>橙：电机控制</span></div>
-                <div class="wire-color-item"><span class="wire-swatch violet"></span><span>紫：编码器反馈</span></div>
-                <div class="wire-color-item"><span class="wire-swatch future"></span><span>蓝色虚线：ToF I²C</span></div>
-              </div>
-            </section>
+          <p class="diagram-caption">已验证的通信接法：MaixCAM2 U2T → NUCLEO CN10-33，NUCLEO CN10-21 → MaixCAM2 U2R，GND → GND。相机使用内置电池；USB-C 用于电脑连接 / 充电，三根 UART 线负责主控通信。</p>
+          <figure class="diagram-frame wiring-diagram"><img src="figure/line-sensor-nucleo-i2c-real-wiring-v2.png" alt="YB-MUX04-2.0 八路循线板通过 I2C 接到 NUCLEO-F446RE：5V 和 GND 供电，SCL 接 D15/PB8，SDA 接 D14/PB9。"></figure>
+          <p class="diagram-caption">已接并通过台架扫描：循线板 5V → NUCLEO 5V、GND → GND、SCL → D15 / PB8、SDA → D14 / PB9。白底读数为 0xFF；黑带横扫时八个通道位都出现响应。此结果确认传感器与 I²C 通信，不等于已经验证车在赛道上能稳定循线。</p>
+          <figure class="diagram-frame wiring-diagram"><img src="figure/at8236-nucleo-motor-control-wiring.png" alt="AT8236 双路驱动板到 NUCLEO-F446RE 的五根控制线：AN2 到 D4/PB5，AN1 到 D3/PB3，BN2 到 D6/PB10，BN1 到 D5/PB4，GND 到 GND。"></figure>
+          <p class="diagram-caption">已接的 5 根独立杜邦线：AN2 → D4 / PB5、AN1 → D3 / PB3、BN2 → D6 / PB10、BN1 → D5 / PB4、GND → GND。AT8236 的 5V、3.3V 不接 NUCLEO；VM 仍未接电池，当前还不能转动电机。PWM 定时器与编码器闭环要在电源安全确认后再配置和测试。</p>
+          <div class="wiring-note-grid" aria-label="当前接线状态">
+            <div class="wiring-note"><strong>相机：</strong>内置电池供电，UART 三线接 NUCLEO；USB-C 接电脑 / 充电。</div>
+            <div class="wiring-note"><strong>循线：</strong>4 根线接 5V、GND、SCL、SDA；校准和八路响应扫描已通过。</div>
+            <div class="wiring-note warn"><strong>电机：</strong>只接控制信号与地，VM 尚未上电；电池和驱动供电请先按电源页测量。</div>
           </div>
 
           <div class="wiring-grid">
             <section class="wiring-card">
-              <h3>UART 接线：相机与八路循线模块连接到主控</h3>
+              <h3>MaixCAM2 UART 接线</h3>
               <div class="wiring-table-wrap">
                 <table class="wiring-table">
                   <thead><tr><th>模块端</th><th>NUCLEO 信号</th><th>板上针脚 / 别名</th><th>连接说明</th></tr></thead>
@@ -636,12 +621,10 @@
                     <tr><td>MaixCAM2 U2T / B0 · UART2_TX</td><td><code>PA10 · USART1_RX</code></td><td><code>CN10-33</code></td><td>TX → RX；相机上排位置 4</td></tr>
                     <tr><td>MaixCAM2 U2R / B1 · UART2_RX</td><td><code>PA9 · USART1_TX</code></td><td><code>CN10-21</code></td><td>主控 TX → 相机 RX；相机上排位置 3</td></tr>
                     <tr><td>MaixCAM2 PMOD · GND</td><td><code>GND</code></td><td><code>CN10-20</code></td><td>GND 共地；相机上排位置 5</td></tr>
-                    <tr><td>八路模块 UART_TX（待核）</td><td><code>PC11 · USART3_RX</code></td><td><code>CN7-2 · Morpho</code></td><td>仅作预留；核对实物手册后再接</td></tr>
-                    <tr><td>八路模块 UART_RX（待核）</td><td><code>PC10 · USART3_TX</code></td><td><code>CN7-1 · Morpho</code></td><td>仅作预留；核对实物手册后再接</td></tr>
                   </tbody>
                 </table>
               </div>
-              <p>MaixCAM2 用 UART2（B0 TX、B1 RX，设备端口为 <code>/dev/ttyS2</code>）连接 NUCLEO 的 USART1。你发来的启动日志显示 A21/A22 的 UART4 正由 Maix Comm Protocol 监听，因此这次避开 UART4。八路模块包装未标具体型号，USART3 的 PC10/PC11 目前只是预留针脚；接线前先核对模块说明书、插座针序、通信协议和 3.3V 电平兼容性。</p>
+              <p>MaixCAM2 用 UART2（B0 TX、B1 RX，设备端口为 <code>/dev/ttyS2</code>）连接 NUCLEO 的 USART1，已收发过结构化 ACK。相机内置电池供电；这组 UART 线提供数据通信和信号地，不承担相机供电。</p>
             </section>
 
             <section class="wiring-card">
@@ -650,14 +633,15 @@
                 <table class="wiring-table">
                   <thead><tr><th>AT8236 控制端</th><th>NUCLEO 信号</th><th>板上针脚 / 定时器</th><th>用途</th></tr></thead>
                   <tbody>
-                    <tr><td>AN1 / AIN1（左轮）</td><td><code>PC6</code></td><td><code>CN10-4 · TIM8_CH1</code></td><td>电机 A 输入 1</td></tr>
-                    <tr><td>AN2 / AIN2（左轮）</td><td><code>PC7</code></td><td><code>CN10-19 · CN5 D9 · TIM8_CH2</code></td><td>电机 A 输入 2</td></tr>
-                    <tr><td>BN1 / BIN1（右轮）</td><td><code>PC8</code></td><td><code>CN10-2 · TIM8_CH3</code></td><td>电机 B 输入 1</td></tr>
-                    <tr><td>BN2 / BIN2（右轮）</td><td><code>PC9</code></td><td><code>CN10-1 · TIM8_CH4</code></td><td>电机 B 输入 2</td></tr>
+                    <tr><td>AN1 / AIN1</td><td><code>PB3</code></td><td><code>NUCLEO D3</code></td><td>电机 A 输入 1 · 已接</td></tr>
+                    <tr><td>AN2 / AIN2</td><td><code>PB5</code></td><td><code>NUCLEO D4</code></td><td>电机 A 输入 2 · 已接</td></tr>
+                    <tr><td>BN1 / BIN1</td><td><code>PB4</code></td><td><code>NUCLEO D5</code></td><td>电机 B 输入 1 · 已接</td></tr>
+                    <tr><td>BN2 / BIN2</td><td><code>PB10</code></td><td><code>NUCLEO D6</code></td><td>电机 B 输入 2 · 已接</td></tr>
+                    <tr><td>AT8236 GND</td><td><code>GND</code></td><td><code>NUCLEO GND</code></td><td>信号参考地 · 已接</td></tr>
                   </tbody>
                 </table>
               </div>
-              <p>四路由 TIM8 控制，AT8236 采用双输入 H 桥控制。VM 接 3S 电池正极支路，GND 接电池负极；控制信号用 3.3V。AT8236 板载 5V/3.3V 输出不要与 MP2491C 对应电源轨并联。</p>
+              <p>图中记录的是现在已经接好的物理针脚。当前没有给 VM 上电，电机方向、PWM 输出和定时器分配都未测试；先不要用电池试转。驱动板的 5V / 3.3V 输出也不要与其他稳压板输出并联。</p>
             </section>
 
             <section class="wiring-card">
@@ -677,19 +661,19 @@
             </section>
 
             <section class="wiring-card">
-              <h3>八路循线模块 · 具体型号待核</h3>
+              <h3>YB-MUX04-2.0 八路循线模块 · I²C</h3>
               <div class="wiring-table-wrap">
                 <table class="wiring-table">
                   <thead><tr><th>模块信号</th><th>STM32 端口</th><th>NUCLEO 物理针脚</th><th>连接</th></tr></thead>
                   <tbody>
-                    <tr><td>UART_TX</td><td><code>PC11 · USART3_RX</code></td><td><code>CN7-2 · Morpho</code></td><td>交叉连接</td></tr>
-                    <tr><td>UART_RX</td><td><code>PC10 · USART3_TX</code></td><td><code>CN7-1 · Morpho</code></td><td>交叉连接</td></tr>
-                    <tr><td>5V</td><td>—</td><td>MP2491C 固定 5V 输出</td><td>传感器供电</td></tr>
-                    <tr><td>GND</td><td><code>GND</code></td><td>与 NUCLEO / 电池负极共地</td><td>逻辑参考地</td></tr>
+                    <tr><td>SCL</td><td><code>PB8 · I2C1_SCL</code></td><td><code>NUCLEO D15</code></td><td>已接并读数</td></tr>
+                    <tr><td>SDA</td><td><code>PB9 · I2C1_SDA</code></td><td><code>NUCLEO D14</code></td><td>已接并读数</td></tr>
+                    <tr><td>5V</td><td>—</td><td><code>NUCLEO 5V</code></td><td>已接；台架由 USB 给 NUCLEO 供电</td></tr>
+                    <tr><td>GND</td><td><code>GND</code></td><td><code>NUCLEO GND</code></td><td>已接，共地</td></tr>
                   </tbody>
                 </table>
               </div>
-              <p>包装标签只确认“八路巡线模块”，没有确认 UART 或 I²C 能力。表格中的 PC10/PC11 和 5V 是待核规划，不是已验证接线；先看 PCB 丝印和随附资料，再确定供电、接口针序和信号电平。</p>
+              <p>板上丝印确认型号 YB-MUX04-2.0，资料给出 5V、I²C 接口和 85mA 工作电流。当前 I²C 读取白底为 0xFF，黑带依次扫过时八个传感器位都出现变化；这只验证传感器读数和连线，循迹控制算法及赛道运行仍待调试。</p>
             </section>
 
             <section class="wiring-card">
@@ -700,7 +684,7 @@
                   <tbody>
                     <tr><td>SCL</td><td><code>PB8 · I2C1_SCL</code></td><td><code>CN10-3 · D15</code></td><td>I²C 时钟</td></tr>
                     <tr><td>SDA</td><td><code>PB9 · I2C1_SDA</code></td><td><code>CN10-5 · D14</code></td><td>I²C 数据</td></tr>
-                    <tr><td>VCC</td><td>—</td><td>MP2491C 固定 3.3V</td><td>按 SEN0628 模式开关设置为 I²C</td></tr>
+                    <tr><td>VCC</td><td>—</td><td>YB-MVP01 固定 3.3V</td><td>按 SEN0628 模式开关设置为 I²C</td></tr>
                     <tr><td>GND</td><td><code>GND</code></td><td>公共地</td><td>地址与总线速率按模块资料确认</td></tr>
                   </tbody>
                 </table>
@@ -710,31 +694,39 @@
           </div>
 
           <div class="wiring-note-grid">
-            <div class="wiring-note"><strong>供电方案仍待实物核验：</strong>规划为稳压模块 VADJ 约 7.5V 接 NUCLEO VIN、固定 5V 给相机和循线模块，电池支路接 AT8236 VM；ToF 到货后再评估 3.3V 支路。新到的稳压模块和扩展板型号/关系尚未确认，不能按图直接上电。</div>
-            <div class="wiring-note warn"><strong>首次接线前核对：</strong>相机 USB-C 供电线需为固定 5V，不能使用 9V PD 触发线；八路循线模块的型号、针序和信号电平待查；520 电机 6pin 针序按实物标识连接。NUCLEO 使用 VIN 外供时按 ST 手册设置 JP5（2–3）并移除 JP1。Gravity IO 的具体板型未确认，当前引脚表直接对应 NUCLEO，不代表 Gravity IO 的端口针序。</div>
+            <div class="wiring-note"><strong>当前台架供电：</strong>NUCLEO 由 ST-LINK mini-USB 供电；八路循线板从 NUCLEO 5V 取电；MaixCAM2 用内置电池。电池暂不接入，AT8236 VM 保持断开。</div>
+            <div class="wiring-note warn"><strong>电机供电上限：</strong>AT8236 板上丝印和 Yahboom 产品页写 5–12V；商家参数表另写 VM 5–17V。未拿到该板版本的厂家确认前按 12V 上限，3S 电池满电 12.6V 不可直连。NUCLEO VIN 外供范围 7–12V；测量前不要接 VIN。</div>
           </div>
-          <p class="diagram-caption">NUCLEO 物理针脚根据 ST UM1724 的 NUCLEO-F446RE 引脚表更新。TIM8 用于 AT8236 四路控制，TIM2/TIM3 用于左右编码器，USART1/USART3 分别连接相机和循线模块，PB8/PB9 保留给 ToF I²C。</p>
+          <p class="diagram-caption">NUCLEO 针脚对应 ST UM1724。AT8236 当前线序记录的是实物已接的 D3–D6 与 GND，定时器 / PWM 分配尚未做运行验证；电机编码器线也尚未接入。</p>
         </div>
       </section>
 
       <section class="page-panel" id="panel-power" data-page-panel="power" role="tabpanel" tabindex="0" aria-labelledby="tab-power" hidden>
         <div class="card">
-          <div class="card-head"><div><div class="section-kicker">POWER DISTRIBUTION</div><h2>单电池 + 到货稳压模块待核</h2></div><div class="small-note">固定 5V → USB-C 供电线待补</div></div>
-          <p class="panel-lead">电池标签确认 11.1V 标称、12.6V 最高。原计划是电池经保险丝和开关直供 AT8236 VM，再由 MP2491C 输出 7.5V、5V 和 3.3V；但本批稳压模块型号和输出尚未确认，因此图示仍是计划方案，不能按图直接接电。</p>
+          <div class="card-head"><div><div class="section-kicker">POWER DISTRIBUTION</div><h2>先测电压，再接动力</h2></div><div class="small-note">电池和稳压输出未上电验证</div></div>
+          <p class="panel-lead">电池标签为 3S、11.1V 标称、12.6V 满电。你的 AT8236 板端标注 DC5–12V，<a href="https://category.yahboom.net/products/dual-md-module" target="_blank" rel="noopener">Yahboom 官方产品页</a>也列 5–12V；商家参数表的 VM 5–17V 与之冲突。按板级输入上限处理：12.6V 满电时不能把电池直连 AT8236 VM。YB-MVP01-V1.0 的电压可调，但输出电流能力还没有确认，所以也不能先假定它适合带电机。</p>
           <div class="power-page-grid">
             <div>
-              <figure class="diagram-frame"><img src="figure/power-distribution.svg" alt="单组 3S 6000mAh 电池经保险丝和总开关后，直接给 AT8236 VM 供电并给 MP2491C 输入；MP2491C 的 VADJ、5V、3.3V 分别供 NUCLEO、MaixCAM2与八路循线模块、SEN0628 ToF。所有地线共地。"></figure>
-              <p class="diagram-caption">这是原计划供电图，不代表到货后的实物接法。先辨认稳压模块和扩展板，再用万用表确认输出；保险丝与主线规格按电机启动电流、电池保护板、电线和接插件额定值核定。</p>
+              <figure class="diagram-frame"><img src="figure/power-distribution.svg" alt="当前接线与供电检查图：电池暂未接入，NUCLEO 用 ST-LINK USB，循线板从 NUCLEO 5V 供电，MaixCAM2 用内置电池；AT8236 VM、外部 VIN 和稳压板输出等待万用表确认。"></figure>
+              <p class="diagram-caption">这是当前安全状态和待测关系图，不是让你直接接电的施工图。测电压时只量空载输出；电池分线、保险丝、AT8236 供电电流和 YB-MPP01 的用途都确认后，再补最终接线图。</p>
             </div>
             <aside class="power-spec-list" aria-label="供电选型说明">
-              <div class="power-spec"><strong>主电池：3S · 6000mAh（标签）</strong><span>标签标注 11.1V 标称、12.6V 最高、额定放电 6A、最大 10A。标签未标 2P 结构；保护板和均衡能力还要核对。</span></div>
-              <div class="power-spec"><strong>电机：电池 → AT8236 VM（计划）</strong><span>AT8236 标签版本为带稳压版；确认 VM 端子和实物板后再接电池。电机堵转电流尚未核实，不要长时间堵转。</span></div>
-              <div class="power-spec"><strong>NUCLEO：VADJ 设 7.5V → VIN</strong><span>NUCLEO-F446RE VIN 允许 7–12V，连接到 CN7-24。外部 VIN 供电时 JP5 设 2–3、JP1 移除；先外部上电，再连接 ST-LINK USB。</span></div>
-              <div class="power-spec"><strong>固定 5V：相机 + 循线模块（计划）</strong><span>MaixCAM2 标称 5V/1A；八路模块的电压与电流待核。相机专用 USB-C 5V 供电线尚未在本批照片中出现。</span></div>
-              <div class="power-spec"><strong>固定 3.3V：SEN0628 ToF</strong><span>ToF 仍保留为后续待购模块，接 MP2491C 3.3V 输出和 I²C1。电机编码器由 AT8236 电机接口的 3.3V 逻辑供电。</span></div>
-              <div class="power-spec"><strong>稳压模块：型号与输出待核</strong><span>包装只写“可调稳压电源模块”，另有一包“稳压电源扩展板”。拆封核对两者是否为不同部件、输入范围、输出端子和电流能力；测量确认前不接主控、相机或传感器。</span></div>
+              <div class="power-spec"><strong>主电池：3S · 6000mAh</strong><span>标签为 11.1V 标称 / 12.6V 最高、额定放电 6A / 最大 10A。下一步先量电池输出；不要把万用表电流档直接跨接电池两极。</span></div>
+              <div class="power-spec"><strong>AT8236 VM：保持断开</strong><span>板级输入按 5–12V；满电电池 12.6V 超出板上范围。先确认可提供足够电流、且输出不高于 12V 的动力电源方案。</span></div>
+              <div class="power-spec"><strong>YB-MVP01-V1.0：空载测三路</strong><span>输入标注 DC6–24V；输出标有 VADJ 1.2–24V、5V、3.3V。先分别测 VADJ、5V、3.3V 对 GND；VADJ 可设为 7.5V，暂不接 NUCLEO VIN。</span></div>
+              <div class="power-spec"><strong>NUCLEO：当前由 ST-LINK mini-USB 供电</strong><span>外部 VIN 范围为 7–12V。使用 VADJ 外供时先断开 USB，并按板卡手册检查电源跳线；本次测量阶段不接 VIN。</span></div>
+              <div class="power-spec"><strong>循线板与相机：台架供电已解决</strong><span>YB-MUX04-2.0 由 NUCLEO 的 5V/GND 供电；MaixCAM2 使用内置电池。两者当前都不需要接车载电池的 5V 支路。</span></div>
+              <div class="power-spec"><strong>YB-MPP01-V2.0：已装，先不接电</strong><span>扩展板的输入、输出和与 YB-MVP01 的关系未验证。先按实物丝印核对端口，避免把两块稳压板的同电压输出并接。</span></div>
             </aside>
           </div>
+          <section class="wiring-card meter-checklist" aria-labelledby="meter-heading">
+            <h3 id="meter-heading">上电前的万用表检查顺序</h3>
+            <ol>
+              <li><b>电池：</b>万用表黑表笔插 COM、红表笔插 VΩ，选直流电压档（V⎓，手动档选 20V）。电池与所有板子断开后，用安全的 T 型转接线露出的红、黑导线测量：红笔接红线，黑笔接黑线。标签范围最高 12.6V；若显示负号，断开后交换表笔再测。没有能稳固接触又不会短路的转接线时，不要拿表笔戳 T 插头触点。</li>
+              <li><b>YB-MVP01 输出：</b>确认极性后只给稳压板输入供电，输出端先不接任何设备。黑笔接板上 GND，红笔依次测 VADJ、5V-OUT、3V3-OUT，并记录实测数字；转动 VADJ 后再测一次，暂时保持在 7.5V 左右。</li>
+              <li><b>先停在读数：</b>不要把 12.6V 电池直连 AT8236，也不要用万用表电流档测电池短路电流。拍下电池读数、三路输出和接线端子照片，再决定下一步动力供电。</li>
+            </ol>
+          </section>
         </div>
       </section>
 
@@ -763,24 +755,32 @@
     // 中文注释：只在第一次打开时装入默认待办，之后以浏览器本地状态为准。
     const STORAGE_KEY = "car-race-design-todos-v1";
     const initialTodos = [
-      { id: "vision", title: "联通 MaixCAM2 与 NUCLEO 并验证 5V 供电", detail: "确认到货稳压模块的固定 5V 输出后，再用 USB-C 供电引线给相机供电；MaixCAM2 UART2（B0/B1）与 F446RE USART1（PA9/PA10）交叉接线后查看识别结果和串口数据。", done: false },
+      { id: "vision", title: "在真实画面验证路线与障碍识别", detail: "MaixCAM2 ↔ NUCLEO UART 台架通信已通过；保存真实场景帧，确认路线中心、障碍候选和数据延迟。相机用内置电池供电。", done: false },
       { id: "width", title: "校准宽度：车体实测 + 安全余量 + 地面坐标换算", detail: "测最外侧轮距，标定 OS04D10 图像到地面的尺度；校正两条边界线间距，确保留出车体宽度和避障余量。", done: false, priority: true },
-      { id: "line", title: "验收八路循线模块并校准黑白线", detail: "包装只标“八路巡线模块”；开箱核对板上型号、供电、接口针序和协议，确认电平后再接主控。固定高度后记录白底/黑线数据。", done: false },
+      { id: "line", title: "在真实赛道调试 YB-MUX04-2.0 循迹", detail: "黑白校准和八路响应扫描已通过；上场后检查安装高度、赛道读数稳定性及循迹控制效果。", done: false },
       { id: "drive", title: "核实 520 带码盘电机参数并测试闭环", detail: "包装标注 1:56、520 减速电机（带码盘）；核对额定电压、编码器每圈计数和堵转电流，再测试左右轮方向与速度闭环。", done: false },
-      { id: "driver", title: "安装 AT8236 并核对左右轮方向", detail: "VM 接 3S 电池；PC6–PC9 输出四路控制；E1/E2 编码器信号接 TIM2/TIM3。堵转时立即停机。", done: false },
+      { id: "driver", title: "安全供电后测试 AT8236 与电机方向", detail: "控制线已接 AN1→D3、AN2→D4、BN1→D5、BN2→D6 和 GND；先确认 VM 供电不超过 12V 且电流能力足够，再抬起车轮测试方向和 PWM。", done: false },
       { id: "battery", title: "确认 3S 6000mAh 电池保护板和配套充电器", detail: "按商品规格核对 6A 额定/10A 最大放电、T 插放电口、DC4.0×1.7 充电口及 3 串均衡功能。", done: false },
-      { id: "regulator", title: "核对到货稳压模块型号并测量输出", detail: "拆封核对可调稳压模块与电源扩展板的芯片、端子和关系；确认规格后再按计划设置 VADJ、5V、3.3V，并用万用表逐路测量。", done: false },
-      { id: "usb-c", title: "补配固定 5V 转 MaixCAM2 USB-C 供电引线", detail: "选带 USB-C 电源识别的 5V 供电线，不使用会输出 9V 的 PD 触发线；确认线序和极性。", done: false },
-      { id: "tof", title: "后续采购并标定 DFRobot SEN0628 8×8 ToF", detail: "ToF 未列入本批采购；到货后用 MP2491C 3.3V 与 I²C1 PB8/PB9，校验距离和左右分区。", done: false },
-      { id: "harness", title: "配齐总开关、保险丝和电源分线", detail: "电池经总保险丝/开关后分到 AT8236 VM 与 MP2491C 输入；分线器、线径和保险丝值按峰值电流核定。", done: false },
+      { id: "regulator", title: "测量 YB-MVP01-V1.0 三路稳压输出", detail: "板上标注 VADJ、固定 5V 和 3.3V；先用直流电压档空载测量各路对 GND 的电压，并记录实际值。", done: false },
+      { id: "usb-c", title: "记录 MaixCAM2 内置电池续航", detail: "相机内置电池供电；长时间视觉测试时记录电量变化，确认比赛运行是否需要额外供电方案。", done: false },
+      { id: "tof", title: "后续采购并标定 DFRobot SEN0628 8×8 ToF", detail: "ToF 未列入本批采购；到货后先核对供电和电平，再用 I²C1 PB8/PB9 验证距离与左右分区。", done: false },
+      { id: "harness", title: "确认 T 型分线、保险丝和总开关", detail: "核对电池分线接头、极性、保险丝和线束额定电流；确认后再设计 AT8236 与稳压板的分支供电。", done: false },
       { id: "chassis", title: "制作底盘并安装后万向轮与电池固定带", detail: "两侧各一只 65mm 驱动轮，配一个后万向轮；整车外廓按竞赛限制复核。", done: false },
       { id: "avoid", title: "测试左右绕障与回线策略", detail: "把障碍物放到线路中心及左右侧，确认安全余量和回线成功率。", done: false },
       { id: "finish", title: "测试终点识别与停车距离", detail: "验证小车通过终点后，尾部投影仍停在终点线以内。", done: false },
-      { id: "power", title: "逐路验证单电池供电与公共地", detail: "核实稳压模块规格后，再确认 AT8236 的电池 VM、NUCLEO VIN 和相机/传感器供电支路。测量电压并检查共地，避免并联不同电源板的同电压输出。", done: false }
+      { id: "power", title: "核对电池电压并确定安全动力支路", detail: "先量 3S 电池和 YB-MVP01 三路空载输出；AT8236 按 12V 板级上限处理，12.6V 满电不可直连。稳压板输出电流能力确认前，不给电机供电。", done: false }
     ];
 
     // 中文注释：迁移旧默认事项时只更新匹配的默认文本，保留用户完成状态和自定义事项。
     const previousDefaultTodos = [
+      { id: "vision", title: "联通 MaixCAM2 与 NUCLEO 并验证 5V 供电", detail: "确认到货稳压模块的固定 5V 输出后，再用 USB-C 供电引线给相机供电；MaixCAM2 UART2（B0/B1）与 F446RE USART1（PA9/PA10）交叉接线后查看识别结果和串口数据。" },
+      { id: "line", title: "验收八路循线模块并校准黑白线", detail: "包装只标“八路巡线模块”；开箱核对板上型号、供电、接口针序和协议，确认电平后再接主控。固定高度后记录白底/黑线数据。" },
+      { id: "driver", title: "安装 AT8236 并核对左右轮方向", detail: "VM 接 3S 电池；PC6–PC9 输出四路控制；E1/E2 编码器信号接 TIM2/TIM3。堵转时立即停机。" },
+      { id: "regulator", title: "核对到货稳压模块型号并测量输出", detail: "拆封核对可调稳压模块与电源扩展板的芯片、端子和关系；确认规格后再按计划设置 VADJ、5V、3.3V，并用万用表逐路测量。" },
+      { id: "usb-c", title: "补配固定 5V 转 MaixCAM2 USB-C 供电引线", detail: "选带 USB-C 电源识别的 5V 供电线，不使用会输出 9V 的 PD 触发线；确认线序和极性。" },
+      { id: "tof", title: "后续采购并标定 DFRobot SEN0628 8×8 ToF", detail: "ToF 未列入本批采购；到货后用 MP2491C 3.3V 与 I²C1 PB8/PB9，校验距离和左右分区。" },
+      { id: "harness", title: "配齐总开关、保险丝和电源分线", detail: "电池经总保险丝/开关后分到 AT8236 VM 与 MP2491C 输入；分线器、线径和保险丝值按峰值电流核定。" },
+      { id: "power", title: "逐路验证单电池供电与公共地", detail: "核实稳压模块规格后，再确认 AT8236 的电池 VM、NUCLEO VIN 和相机/传感器供电支路。测量电压并检查共地，避免并联不同电源板的同电压输出。" },
       { id: "vision", title: "确认 MaixCAM2 4GB + 4K SC850SL 无电池套装" },
       { id: "vision", title: "确认 MaixCAM2 4GB + 2K OS04D10 无电池套装", detail: "核对是否可选无独立机载电池版本；实测相机输出、图像处理到 F446RE 的 UART 延迟。" },
       { id: "vision", title: "验证 MaixCAM2 5V/1A 数据线供电与串口", detail: "由同一组车载电池经 5V/2A 降压模块供电；实测启动稳定性、图像帧率和到 F446RE 的 UART 延迟。" },
