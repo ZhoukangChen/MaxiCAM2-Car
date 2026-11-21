@@ -1,94 +1,76 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 880" role="img" aria-labelledby="title desc">
-  <title id="title">小车供电现状与万用表检查顺序</title>
-  <desc id="desc">电池和驱动板动力支路暂未连接。电池满电可达12.6伏，AT8236板级输入上限按12伏处理。YB-MVP01各路输出和YB-MPP01电源扩展板接法等待测量核对。当前NUCLEO由ST-LINK USB供电，循线板从NUCLEO 5伏取电，MaixCAM2使用内置电池。</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 900" role="img" aria-labelledby="title desc">
+  <title id="title">循迹小车台架供电实测与模块连接状态</title>
+  <desc id="desc">2026年11月21日记录：3S电池实测12.67伏输入YB-MVP01，VADJ实测10.37伏供AT8236并完成左右电机短点动。NUCLEO由Mini-USB供电，循线板从NUCLEO 5伏取电，MaixCAM2用内置电池。固定5伏和3.3伏输出已测电压但带载能力未验证。</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#101a29"/><stop offset="1" stop-color="#1c2d43"/></linearGradient>
-    <filter id="shadow" x="-15%" y="-15%" width="130%" height="140%"><feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#030812" flood-opacity=".3"/></filter>
+    <filter id="shadow" x="-15%" y="-15%" width="130%" height="140%"><feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#030812" flood-opacity=".28"/></filter>
     <style>
       text{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
-      .title{fill:#f1f6ff;font-size:25px;font-weight:850}.subtitle{fill:#a9bad0;font-size:15px}
-      .head{font-size:18px;font-weight:800}.body{font-size:14px}.small{font-size:12px}.tiny{font-size:11px}
+      .title{fill:#f1f6ff;font-size:27px;font-weight:850}.subtitle{fill:#a9bad0;font-size:15px}
+      .head{font-size:19px;font-weight:800}.body{font-size:15px}.small{font-size:13px}.tiny{font-size:12px}
       .white{fill:#eff5ff}.muted{fill:#a6b7cc}.amber{fill:#ffdc8c}.cyan{fill:#b8f2ff}.green{fill:#a9f4d7}.red{fill:#ffaaaa}
-      .box{fill:#18293d;stroke:#506783;stroke-width:1.5}.warnbox{fill:#30252c;stroke:#f27878;stroke-width:2}
-      .line-pending{fill:none;stroke:#ffc857;stroke-width:3;stroke-dasharray:9 8;stroke-linecap:round}
-      .line-now{fill:none;stroke:#63e6be;stroke-width:3.5;stroke-linecap:round}
+      .box{fill:#18293d;stroke:#506783;stroke-width:1.5}.good{fill:#172e32;stroke:#63e6be;stroke-width:2}.warnbox{fill:#30252c;stroke:#f27878;stroke-width:2}
+      .line-good{fill:none;stroke:#63e6be;stroke-width:4;stroke-linecap:round}.line-pending{fill:none;stroke:#ffc857;stroke-width:3;stroke-dasharray:9 8;stroke-linecap:round}
     </style>
-    <marker id="arrowAmber" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#ffc857"/></marker>
     <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#63e6be"/></marker>
+    <marker id="arrowAmber" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#ffc857"/></marker>
   </defs>
-  <rect width="1280" height="880" rx="24" fill="url(#bg)"/>
-  <rect x="1" y="1" width="1278" height="878" rx="23" fill="none" stroke="#5c7593" stroke-opacity=".38"/>
-  <text x="38" y="48" class="title">供电现状 · 先测量，再接动力</text>
-  <text x="38" y="76" class="subtitle">绿框：目前已验证的台架供电　　黄虚线：待测 / 待确认　　红框：不要直接连接</text>
+  <rect width="1280" height="900" rx="24" fill="url(#bg)"/>
+  <rect x="1" y="1" width="1278" height="898" rx="23" fill="none" stroke="#5c7593" stroke-opacity=".38"/>
+  <text x="38" y="48" class="title">台架供电实测 · 2026-11-21</text>
+  <text x="38" y="77" class="subtitle">绿色：已测通的路径　　黄色虚线：复接后待复测 / 负载能力待核　　红框：不可直连</text>
 
   <g filter="url(#shadow)">
-    <rect x="40" y="112" width="300" height="174" rx="16" class="box" stroke="#f27878"/>
-    <rect x="385" y="140" width="195" height="118" rx="16" class="box" stroke="#ffc857"/>
-    <rect x="625" y="112" width="615" height="174" rx="16" class="warnbox"/>
-    <rect x="40" y="330" width="365" height="196" rx="16" class="box" stroke="#67d8ef"/>
-    <rect x="430" y="330" width="330" height="196" rx="16" class="box" stroke="#8ea8c3"/>
-    <rect x="785" y="330" width="455" height="196" rx="16" class="box" stroke="#63e6be"/>
-    <rect x="40" y="570" width="365" height="132" rx="16" class="box" stroke="#63e6be"/>
-    <rect x="430" y="570" width="330" height="132" rx="16" class="box" stroke="#a4a7ff"/>
-    <rect x="785" y="570" width="455" height="132" rx="16" class="box" stroke="#8298b2"/>
+    <rect x="40" y="116" width="300" height="205" rx="16" class="box"/>
+    <rect x="390" y="116" width="375" height="205" rx="16" class="good"/>
+    <rect x="815" y="116" width="425" height="205" rx="16" class="warnbox"/>
+    <rect x="40" y="385" width="360" height="190" rx="16" class="box"/>
+    <rect x="430" y="385" width="350" height="190" rx="16" class="box"/>
+    <rect x="810" y="385" width="430" height="190" rx="16" class="box"/>
+    <rect x="40" y="630" width="1200" height="218" rx="18" class="box"/>
   </g>
 
-  <text x="64" y="148" class="head white">3S 6000mAh 电池</text>
-  <text x="64" y="178" class="body white">标签：11.1V 标称 · 12.6V 满电</text>
-  <text x="64" y="204" class="body muted">一个 T 型放电口；万用表读数待记录</text>
-  <text x="64" y="244" class="small amber">先用安全转接线测，不要让表笔短接插头触点</text>
+  <text x="64" y="153" class="head white">3S 6000mAh 电池</text>
+  <text x="64" y="188" class="body white">标签：11.1V 标称 / 12.6V 最高</text>
+  <text x="64" y="220" class="body green">万用表实测：12.67V</text>
+  <text x="64" y="263" class="small muted">单个 T 型输出口 → 稳压板输入</text>
+  <text x="64" y="291" class="small amber">禁止将电池直接接 AT8236 VM</text>
 
-  <text x="482" y="176" text-anchor="middle" class="head amber">分线 / 保护</text>
-  <text x="482" y="205" text-anchor="middle" class="small white">插头、保险丝、额定电流</text>
-  <text x="482" y="229" text-anchor="middle" class="small muted">接法尚未确认</text>
+  <text x="414" y="153" class="head green">YB-MVP01-V1.0 降压板</text>
+  <text x="414" y="185" class="small white">输入：DC6–24V · 接入 3S 电池</text>
+  <text x="414" y="224" class="body white">VADJ：10.37V → AT8236 VM</text>
+  <text x="414" y="256" class="small cyan">固定 5V：5.13V（带载能力未测）</text>
+  <text x="414" y="284" class="small" fill="#d3d4ff">固定 3.3V：3.34V（带载能力未测）</text>
 
-  <text x="651" y="150" class="head red">AT8236 双路驱动 · VM 暂时断开</text>
-  <text x="651" y="181" class="body white">板上丝印 DC 5–12V；Yahboom 产品页也列 5–12V</text>
-  <text x="651" y="207" class="body red">12.6V 满电电池超过 12V 上限，不能直连 VM</text>
-  <text x="651" y="244" class="small muted">商家参数表写 VM 5–17V，存在冲突；等厂家确认此板版本前按 12V 上限</text>
+  <text x="839" y="153" class="head red">AT8236 双路驱动 · 按 5–12V 上限</text>
+  <text x="839" y="187" class="body white">VM 输入端实测：10.37V</text>
+  <text x="839" y="220" class="body green">MOTOR-A / MOTOR-B 短点动通过</text>
+  <text x="839" y="257" class="small red">板上及官方页标注 5–12V</text>
+  <text x="839" y="284" class="small muted">资料表另写 5–17V；冲突未澄清前按 12V</text>
 
-  <path d="M340 198H385" class="line-pending" marker-end="url(#arrowAmber)"/>
-  <path d="M580 176H605V198H625" class="line-pending" marker-end="url(#arrowAmber)"/>
-  <path d="M482 258V302H222V330" class="line-pending" marker-end="url(#arrowAmber)"/>
+  <path d="M340 212H379" class="line-good" marker-end="url(#arrowGreen)"/>
+  <path d="M765 212H804" class="line-good" marker-end="url(#arrowGreen)"/>
+  <text x="360" y="194" text-anchor="middle" class="tiny green">12.67V</text>
+  <text x="785" y="194" text-anchor="middle" class="tiny green">10.37V</text>
 
-  <text x="64" y="367" class="head cyan">YB-MVP01-V1.0 降压板</text>
-  <text x="64" y="394" class="small white">输入 DC 6–24V · 输出端先空载测量</text>
-  <rect x="64" y="416" width="92" height="38" rx="8" fill="#313022" stroke="#ffc857"/>
-  <rect x="166" y="416" width="92" height="38" rx="8" fill="#1d3541" stroke="#66d9ef"/>
-  <rect x="268" y="416" width="108" height="38" rx="8" fill="#292a43" stroke="#a4a7ff"/>
-  <text x="110" y="441" text-anchor="middle" class="small amber">VADJ</text>
-  <text x="212" y="441" text-anchor="middle" class="small cyan">固定 5V</text>
-  <text x="322" y="441" text-anchor="middle" class="small" fill="#d3d4ff">固定 3.3V</text>
-  <text x="64" y="483" class="small white">板上标注 VADJ 1.2–24V；实测值 / 输出电流未知</text>
-  <text x="64" y="505" class="small amber">VADJ 可先调至约 7.5V，测准后仍先不接负载</text>
+  <text x="64" y="425" class="head white">NUCLEO-F446RE</text>
+  <text x="64" y="459" class="body green">当前由 ST-LINK Mini-USB 供电</text>
+  <text x="64" y="492" class="small white">外部 VIN 未接；避免双路供电</text>
+  <text x="64" y="531" class="small muted">电机测试固件：上电先拉低四路输入</text>
 
-  <text x="454" y="367" class="head white">YB-MPP01-V2.0 电源扩展板</text>
-  <text x="454" y="399" class="body muted">已安装；端子和电源路径待按丝印核对</text>
-  <text x="454" y="430" class="body muted">先不与 YB-MVP01 的输出并联</text>
-  <text x="454" y="482" class="small amber">未确认用途前不接电池和设备</text>
+  <text x="454" y="425" class="head cyan">YB-MUX04-2.0 循线板</text>
+  <text x="454" y="459" class="body white">5V / GND 由 NUCLEO 供电</text>
+  <text x="454" y="492" class="small muted">SCL→D15/PB8 · SDA→D14/PB9</text>
+  <text x="454" y="531" class="small amber">I²C 旧测试通过；本次复接待复测</text>
 
-  <text x="809" y="367" class="head green">NUCLEO-F446RE</text>
-  <text x="809" y="399" class="body white">当前由 ST-LINK mini-USB 供电</text>
-  <text x="809" y="430" class="body white">外部 VIN 允许 7–12V；VADJ 先测到约 7.5V</text>
-  <text x="809" y="461" class="small muted">测量阶段保持 VIN 断开；外供前按手册检查 JP1 / JP5</text>
-  <text x="809" y="493" class="small amber">不要同时试接未经测量的外部电源</text>
+  <text x="834" y="425" class="head white">MaixCAM2</text>
+  <text x="834" y="459" class="body white">内置电池供电；USB-C 接电脑 / 充电</text>
+  <text x="834" y="492" class="small muted">U2T↔PA10 · U2R↔PA9 · GND 共地</text>
+  <text x="834" y="531" class="small amber">旧 UART 测试通过；本次复接待复测</text>
 
-  <text x="64" y="608" class="head green">循线板 YB-MUX04-2.0</text>
-  <text x="64" y="638" class="small white">当前由 NUCLEO 5V / GND 供电</text>
-  <text x="64" y="665" class="small muted">I²C 已读数；黑白校准和八路扫描通过</text>
-
-  <text x="454" y="608" class="head" fill="#d4d5ff">MaixCAM2</text>
-  <text x="454" y="638" class="small white">使用内置电池；USB-C 接电脑 / 充电</text>
-  <text x="454" y="665" class="small muted">UART 三线与 NUCLEO 通信，不取电</text>
-
-  <text x="809" y="608" class="head white">未完成的动力检查</text>
-  <text x="809" y="638" class="small white">电池分线、保险丝及驱动供电能力待确认</text>
-  <text x="809" y="665" class="small muted">VM 未上电；电机方向、PWM、编码器闭环未测试</text>
-
-  <rect x="40" y="738" width="1200" height="104" rx="16" fill="#111d2c" stroke="#415975"/>
-  <text x="64" y="774" class="head white">上电前测量</text>
-  <text x="245" y="773" class="body white">① 断开所有负载，直流电压档测电池</text>
-  <text x="615" y="773" class="body white">② 空载测 VADJ、5V、3.3V 对 GND</text>
-  <text x="1010" y="773" class="body red">③ 不测短路电流，不直连 AT8236</text>
-  <text x="64" y="812" class="small muted">电压读数、表笔位置和板上丝印拍照记录；供电分线与额定电流确认后，再决定电机动力接法。</text>
+  <text x="66" y="674" class="head white">本次里程碑</text>
+  <text x="66" y="710" class="body green">车轮架空：左右轮各点动 200ms，最终均向车头方向前进</text>
+  <text x="66" y="746" class="body white">右轮 MOTOR-A：软件由 AIN2 驱动　｜　左轮 MOTOR-B：BIN1 驱动</text>
+  <text x="66" y="779" class="small muted">当前程序只做 ARM 门控的短脉冲，不是循迹 / 视觉 / 闭环运行固件。</text>
+  <text x="66" y="818" class="small amber">YB-MPP01-V2.0 已安装但未纳入本次供电路径；调压板持续电流、温升、保险丝与负载能力仍待核验。</text>
 </svg>
